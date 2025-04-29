@@ -186,3 +186,54 @@ Interestingly, LLMs that work with text data and generate open-ended outputs hav
 
 **Read more**: [LLM Evaluation Guide](https://www.evidentlyai.com/llm-guide/llm-evaluation). Refer to this guide for additional explanations on different LLM evaluation workflows, such as comparative experiments, LLM stress-testing, red-teaming, and regression testing.
 
+### Metrics and methods
+
+Some LLM evaluation metrics — just like traditional predictive metrics — apply **only in reference-based scenarios**.  
+Other methods, such as using **LLM judges**, can be used in both **reference-based** and **reference-free** evaluation.
+
+Here are different LLM evaluation methods at a glance:
+
+> 📖 **Source**: [LLM Evaluation Metrics Guide](https://www.evidentlyai.com/llm-guide/llm-evaluation-metrics).  
+> You can refer to this guide for additional explanations on different LLM evaluation metrics.
+
+---
+
+In the following chapters, we will cover the following types of evaluation methods:
+
+#### **Deterministic methods**
+- **Text statistics**  
+- **Pattern matching** with regular expressions  
+- **Overlap-based metrics** like ROUGE and BLEU  
+
+#### **Model-based methods**
+- **Semantic similarity metrics** based on embedding models  
+- **LLM-as-a-judge** approaches  
+- **ML-based scoring models**  
+
+### Dataset-level vs. Row-level evaluations
+
+One more important distinction to make before we move into specific examples is between:
+
+- Evaluations conducted at the dataset level
+- Evaluations conducted at the individual input/output (row) level)
+
+**Dataset-level** metrics aggregate results across all predictions and produce a single quality measure. This is typical for predictive tasks. In classic ML, we often use metrics like: Precision, Recall, F1 score. These metrics summarize performance across the full evaluation dataset — often with thousands or millions of examples.
+
+**Row-level evaluators**, in contrast, focus on assessing each response individually. For example, LLM judges, ML models or semantic similarity evaluators provide a score or label per generated output — such as:
+- Whether a response is correct or not  
+- Sentiment score
+- Similarity score
+
+These numerical or categorical scores can be called **descriptors**. You can assign multiple descriptors to each input (or even a full conversation), evaluating aspects like relevance, tone, and safety at once.
+
+**Score aggregation**. When working with row-level descriptors, you still need a way to combine individual scores into a performance summary across your test inputs.Sometimes it’s simple, such as:
+- Averaging numerical scores  
+- Counting the share of outputs that have a "good" label  
+
+In other cases, you may need more complex aggregation logic. For instance:
+- Set a threshold (e.g., flag any output with a semantic similarity score < 0.85 as "incorrect")  
+- Calculate the share of correct responses based on that rule  
+
+
+> When exploring evaluation methods below, we will focus primarily on **row-level evaluations**.  
+> However, it is important to keep in mind your **aggregation strategy** as you run evals across multiple inputs in your dataset.
