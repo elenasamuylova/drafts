@@ -454,7 +454,7 @@ $$
 
 ROUGE typically includes two variants:
 - **ROUGE-N**: Measures overlap of word n-grams (e.g., unigrams, bigrams) between the reference and the generated output. For example, it might compare single words (unigrams), pairs of words (bigrams), or longer sequences.
-- **ROUGE-L((: Measures the Longest Common Subsequence (LCS) — identifying the longest ordered set of words shared by both texts. This captures structural similarity and sentence-level alignment better than simple n-grams.
+- **ROUGE-L**: Measures the Longest Common Subsequence (LCS) — identifying the longest ordered set of words shared by both texts. This captures structural similarity and sentence-level alignment better than simple n-grams.
 
 **Example (Summarization)**  
 - **Reference**: “The movie was **<span style='color:green'>exciting and full of twists</span>**.”  
