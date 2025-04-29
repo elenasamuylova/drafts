@@ -294,8 +294,9 @@ $$
 > “Welcome!!! Visit @website_123” → High non-letter ratio
 
 **Formula**  
+
 $$
-\text{Non-Letter Character Percentage} = \left( \frac{\text{Number of Non-Letter Characters}}{\text{Total Characters}} \right) \times 100
+\text{Non-Letter Percentage} = \left( \frac{\text{Non-Letter Characters}}{\text{Total Characters}} \right) \times 100
 $$
 
 ### Presence of specific words or phrases
@@ -443,7 +444,7 @@ Generated: “The fluffy cat rested lazily on a warm mat.”
 
 Final BLEU score:  
 $$
-\text{BLEU} = \text{brevity penalty} \cdot \exp\left(\sum_n \text{precision score}(\text{n-grams})\right)
+\text{BLEU} = \mathrm{brevity\_penalty} \cdot \exp\left( \sum_n \mathrm{precision\_score}(n\text{-grams}) \right)
 $$
 
 **Limitations** While BLEU is a popular metric, it has some notable limitations. 
