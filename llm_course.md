@@ -196,8 +196,6 @@ Here are different LLM evaluation methods at a glance:
 > 📖 **Source**: [LLM Evaluation Metrics Guide](https://www.evidentlyai.com/llm-guide/llm-evaluation-metrics).  
 > You can refer to this guide for additional explanations on different LLM evaluation metrics.
 
----
-
 In the following chapters, we will cover the following types of evaluation methods:
 
 #### **Deterministic methods**
@@ -233,7 +231,6 @@ These numerical or categorical scores can be called **descriptors**. You can ass
 In other cases, you may need more complex aggregation logic. For instance:
 - Set a threshold (e.g., flag any output with a semantic similarity score < 0.85 as "incorrect")  
 - Calculate the share of correct responses based on that rule  
-
 
 > When exploring evaluation methods below, we will focus primarily on **row-level evaluations**.  
 > However, it is important to keep in mind your **aggregation strategy** as you run evals across multiple inputs in your dataset.
