@@ -443,6 +443,7 @@ Generated: “The fluffy cat rested lazily on a warm mat.”
 - **Brevity penalty** is not applied here because the generated text is longer than the reference.
 
 Final BLEU score:  
+
 $$
 \text{BLEU} = \mathrm{brevity\_penalty} \cdot \exp\left( \sum_n \mathrm{precision\_score}(n\text{-grams}) \right)
 $$
