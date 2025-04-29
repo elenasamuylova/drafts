@@ -711,37 +711,20 @@ The LLM-as-a-Judge approach is especially powerful for evaluating complex system
 In a RAG system, the model retrieves content (e.g. from documents or a knowledge base) and uses it to answer user queries. An LLM-as-Judge can help assess if the system can find relevant documents and whether the response makes good use of that retrieved information.
 
 You can evaluate key aspects like:
-
-**Relevance or Context Quality**  
-Are the retrieved document chunks relevant to the query? Do they contain enough information to support a good answer?
-
+-  **Relevance or Context Quality**. Are the retrieved document chunks relevant to the query? Do they contain enough information to support a good answer?
 This helps you surface possible gaps in your knowledge base or inefficiencies in your search or chunking strategies. 
-
-**Faithfulness/Groundedness**  
-Does the generated response stay factually aligned with the retrieved context?
-
-**Example**  
-If the document says “Employees are eligible for paid time off after 90 days,” but the system answers “Employees are eligible for unlimited paid time off,” this should be flagged. The “unlimited” detail is hallucinated and unsupported.
-
-**Refusals**  
-How often does the system decline to answer? This will help assess the user experience by flagging questions that are left unanswered.
+- **Faithfulness/Groundedness** Does the generated response stay factually aligned with the retrieved context?
+> **Example**. If the document says “Employees are eligible for paid time off after 90 days,” but the system answers “Employees are eligible for unlimited paid time off,” this should be flagged. The “unlimited” detail is hallucinated and unsupported.
+- **Refusals**. How often does the system decline to answer? This will help assess the user experience by flagging questions that are left unanswered.
 
 These evaluation aspects do not require reference response — which makes them especially useful for monitoring in production. You can also assess additional properties when you conduct offline evaluations using designed test cases that target specific scenarios.
 
 **Refusal testing** is a useful indicator of whether the system avoids hallucinations while remaining helpful. You can test your RAG system for:
+- **Correct denials**. Does the system appropriately decline to answer when the retrieved context lacks sufficient information?
+> Example. If the knowledge base does not include coverage for a rare medical condition, the model should respond with something like: “I’m sorry, I don’t have information on that.”You can test this by including test queries that are intentionally unanswerable.
+- **Incorrect denials**. Does the system decline to answer when the retrieved documents do contain the required information? This can be tested using questions that are known to be answerable. Testing this helps ensure the system declines appropriately and doesn't unnecessarily avoid answering questions it can handle.
 
-**Correct denials**  
-Does the system appropriately decline to answer when the retrieved context lacks sufficient information?
-
->Example. If the knowledge base does not include coverage for a rare medical condition, the model should respond with something like: “I’m sorry, I don’t have information on that.” You can test this by including test queries that are intentionally unanswerable.
-
-**Incorrect denials**  
-Does the system decline to answer when the retrieved documents do contain the required information? This can be tested using questions that are known to be answerable
-
-Testing this helps ensure the system declines appropriately and doesn't unnecessarily avoid answering questions it can handle.
-
-**Correctness testing**  
-When you have ground truth responses available, you can also assess RAG output correctness just like any other system: by comparing its answers against the expected responses. This can be done using semantic similarity, or by using an LLM-as-Judge to score alignment and faithfulness.
+**Correctness testing** . When you have ground truth responses available, you can also assess RAG output correctness just like any other system: by comparing its answers against the expected responses. This can be done using semantic similarity, or by using an LLM-as-Judge to score alignment and faithfulness.
 
 You can read more about RAG evaluation in this blog:  
 https://www.evidentlyai.com/blog/open-source-rag-evaluation-tool
@@ -752,29 +735,18 @@ For agent-based systems, where the AI is responsible for performing tasks such a
 
 You can use it to evaluate task execution along multiple dimensions. For example:
 
-**Usefulness**  
-Did the agent provide a response that was clear, actionable, and helpful?
+- **Usefulness**. Did the agent provide a response that was clear, actionable, and helpful?
+> **Example**. If asked to schedule a meeting, did it provide all necessary details like time and location?
 
-**Example**  
-If asked to schedule a meeting, did it provide all necessary details like time and location?
+- **Task Completion**. Did the agent complete the assigned task?
+> **Example**. If it was supposed to send an email or create a calendar event, was the task actually executed? An LLM-as-a-Judge can verify this by checking logs, API responses, or other system-level confirmations to ensure the action was performed. 
 
-**Task Completion**  
-Did the agent complete the assigned task?
+- **Correct Tool Use**. Did the agent invoke the appropriate tools or APIs to complete the action?
+> **Example**.If the user asks to add an event to their calendar, the agent should select the correct calendar tool (e.g., Google Calendar or Outlook) based on the user’s context — and avoid hallucinating unsupported or unexpected commands.
 
-**Example**  
-If it was supposed to send an email or create a calendar event, was the task actually executed? An LLM-as-a-Judge can verify this by checking logs, API responses, or other system-level confirmations to ensure the action was performed. 
+**Session-level evaluation**. Agent behavior often unfolds over multi-step interactions, not just single responses. To properly evaluate such systems, it's important to assess the entire session or conversation, rather than isolated outputs.
 
-**Correct Tool Use**  
-Did the agent invoke the appropriate tools or APIs to complete the action?
-
-**Example**  
-If the user asks to add an event to their calendar, the agent should select the correct calendar tool (e.g., Google Calendar or Outlook) based on the user’s context — and avoid hallucinating unsupported or unexpected commands.
-
-**Session-level evaluation**  
-Agent behavior often unfolds over multi-step interactions, not just single responses. To properly evaluate such systems, it's important to assess the entire session or conversation, rather than isolated outputs.
-
-**For example**, you can pass the full interaction history into an LLM-as-Judge and ask it to evaluate:
-
+For example, you can pass the full interaction history into an LLM-as-Judge and ask it to evaluate:
 - **Task execution**: Did the agent follow through on the plan it proposed?  
 - **User experience**: Did the user have to repeat themselves, express confusion, or dissatisfaction?  
 - **Dialogue quality**: Did the agent gather all needed information to complete the task?
