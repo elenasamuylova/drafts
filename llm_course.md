@@ -22,20 +22,14 @@ These kinds of tasks are what make generative systems so powerful — you can au
 
 > In this guide, we’ll explore how to evaluate AI systems built with large language models — from development to real-world monitoring.
 
----
-
 ## Chapter 1: Basics of AI system evaluation
 
 In this chapter, we introduce two major types of AI tasks — **predictive (discriminative)** and **generative** — and explain how they shape the evaluation process. We also briefly cover how predictive systems are typically evaluated to learn from existing foundations.
-
----
 
 ### Discriminative vs Generative tasks 
 
 AI systems and models can be broadly divided into two categories: **discriminative** and **generative**.  
 Each serves a different purpose — and their evaluation methods reflect these differences.
-
----
 
 ### Discriminative tasks
 
@@ -62,8 +56,6 @@ For example, use an LLM to classify support queries into a set of predefined top
 
 In these cases, you can apply the same evaluation approaches as you would with traditional ML models.
 
----
-
 ### Generative tasks
 
 Generative models, on the other hand, **create new data** that resembles the data they were trained on.  
@@ -78,8 +70,6 @@ Instead of classifying or predicting, they generate content — such as text, im
 
 Generative models are **creators**. They learn the underlying patterns in the data and use that to produce something new.
 
----
-
 #### Quick Comparison: Discriminative vs. Generative Tasks
 
 |                        | **Discriminative Tasks**       | **Generative Tasks**            |
@@ -88,27 +78,19 @@ Generative models are **creators**. They learn the underlying patterns in the da
 | **Output**             | Labels, scores or predictions  | Text, code, images, or audio     |
 | **Evaluation**         | Clear, objective metrics       | Complex, subjective metrics      |
 
----
-
 Many modern applications of LLMs including AI agents and chatbots fall under **generative tasks**.
 
 Before we dive into evaluating generative tasks, let’s first quickly review how this works for more traditional **predictive (discriminative)** systems.  
 This helps with understanding core evaluation principles.
 
----
-
 ## Evaluating predictive systems
 
 The process of evaluating discriminative systems is well-established and relatively straightforward.
-
----
 
 ### Offline evaluation
 
 Evaluation typically happens **offline**: you run an evaluation script or pipeline as you experiment and build your ML model.  
 You assess its performance using a designated **test dataset**.
-
----
 
 ### Test dataset
 
@@ -125,8 +107,6 @@ You then use part of this same dataset for evaluation.
 
 For example, you might work with a collection of emails labeled as spam or not, or a historical record of product sales transactions.  
 After training the model using most of the data, you evaluate it by comparing its predictions against the known outcomes in the remaining test set.
-
----
 
 ### Evaluation metrics
 
@@ -153,13 +133,11 @@ Here are examples based on the type of the task.
   - Normalized Discounted Cumulative Gain (NDCG)  
   - Precision at K  
 
-**Further reading:** You can find more detailed guides on Classification Metrics and Ranking Metrics.
+**Further reading:** You can find more detailed guides on [Classification Metrics](https://www.evidentlyai.com/classification-metrics) and [Ranking Metrics](https://www.evidentlyai.com/ranking-metrics).
 
 While there is some diversity in metrics, the evaluation process for predictive systems is relatively straightforward:  
 there is a single "right" answer and you can essentially quantify how many predictions were correct or close enough.  
 (In tasks like multi-label classification, where multiple correct labels can apply to a single instance, similar metrics are adapted to evaluate across all relevant labels.)
-
----
 
 ### Production monitoring
 
@@ -178,10 +156,7 @@ You typically continue monitoring model quality by:
   - **Input data quality checks**, which helps make sure that incoming data is valid and not corrupted.
   - **Data drift monitoring**, which tracks changes in input data distributions to verify that the model operates in a familiar environment.
 
-**Further reading:** Learn more about data drift:  
-https://www.evidentlyai.com/ml-in-production/data-drift.
-
----
+**Further reading:** Learn more about [data drift](https://www.evidentlyai.com/ml-in-production/data-drift). 
 
 ### Evaluating LLM outputs
 
@@ -190,7 +165,5 @@ Whenever you use LLMs for predictive tasks, you can apply the same evaluation ap
 However, evaluating **generative tasks** is more complex.  
 When multiple valid answers are possible, you can't simply check if an answer exactly matches a given reference.  
 You need more complex comparative metrics as well as an option to evaluate more subjective quality dimensions such as **clarity** and **helpfulness**.
-
----
 
 > In the next chapter, we’ll introduce methods and tools for evaluating generative tasks.
