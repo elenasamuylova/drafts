@@ -279,6 +279,7 @@ Verifying text length is especially relevant in applications like Q&A systems or
 > “Xylofoo is a grfytpl.” → High OOV rate flags made-up words
 
 **Formula**  
+
 $$
 \text{OOV Rate} = \left( \frac{\text{Number of OOV Words}}{\text{Total Words}} \right) \times 100
 $$
@@ -442,7 +443,7 @@ Generated: “The fluffy cat rested lazily on a warm mat.”
 
 Final BLEU score:  
 $$
-\text{BLEU} = \text{brevity\_penalty} \cdot \exp\left(\sum_n \text{precision\_score}(\text{n-grams})\right)
+\text{BLEU} = \text{brevity penalty} \cdot \exp\left(\sum_n \text{precision score}(\text{n-grams})\right)
 $$
 
 **Limitations** While BLEU is a popular metric, it has some notable limitations. 
