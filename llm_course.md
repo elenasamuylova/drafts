@@ -142,3 +142,47 @@ You typically continue monitoring model quality by:
 Whenever you use LLMs for predictive tasks, you can apply the same evaluation approaches as with traditional machine learning models — both offline and online. However, evaluating **generative tasks** is more complex. When multiple valid answers are possible, you can't simply check if an answer exactly matches a given reference. You need more complex comparative metrics as well as an option to evaluate more subjective quality dimensions such as clarity or helpfulness.
 
 > In the next chapter, we’ll introduce methods and tools for evaluating generative tasks.
+
+## Chapter 2: Evaluating generative systems
+
+When building generative systems, the typical starting point is **manual evaluation**, where you manually review or label outputs. This step is essential: manual labeling helps you understand the types of errors your system produces and define your quality criteria. However, manual evaluation has limited scalability, especially when you run iterative experiments like trying different versions of prompts. **Automated evaluations** help speed up and scale the process. 
+
+In this chapter, we will discuss approaches to automated evaluation of LLM system outputs, and types of metrics you can use.
+
+### Reference-based vs Reference-free evaluations
+
+There are two main evaluation workflows, depending on the stage and nature of your AI system:
+
+- **Reference-based evaluation**  
+- **Reference-free evaluation**
+
+### Reference-based evaluation
+
+This approach relies on having **ground truth answers**, and evaluation measures if the new outputs match the ground truth. Essentially, it follows the same principles as in traditional predictive system evaluation.
+
+Reference-based evaluations are conducted **offline**:
+- When you re-run evaluations after making changes, such as editing prompts during experiments.  
+- Before pushing updates to production, as part of regression testing.
+
+You start by preparing a custom evaluation dataset of expected inputs and outputs — for example, a set of questions you expect users to ask and their ideal responses. This dataset is often referred to as a **"golden set."** It should be representative of your real use cases. The quality of your evaluations will directly depend on how well it reflects the tasks your system must handle.
+
+It is important to expand your golden set over time to keep it relevant as your product evolves or you discover new scenarios or edge cases. (But keep in mind that you cannot directly compare evaluation metrics across different golden sets if you change the underlying data you are testing on.)
+
+Since multiple valid answers are often possible, you cannot rely solely on exact match metrics. Instead, specialized methods such as **semantic similarity scoring** or **LLM-as-a-judge** are used to assess the closeness or correctness of the model's outputs relative to the reference.
+
+> We’ll cover specific approaches in the following sections.
+
+### Reference-free evaluation
+
+Reference-free methods directly assign quantitative scores or labels to the generated outputs without needing a ground truth answer.
+
+This workf for both **offline and online testing**, when obtaining references isn’t possible or practical — for example:
+- In complex, open-ended tasks like content generation  
+- In multi-turn conversations  
+- In production settings, where outputs are evaluated in real time  
+- In certain evaluation scenarios like adversarial testing, where you assess the expected properties of an answer (e.g., by evaluating that it does not have any toxicity or bias)
+
+Interestingly, LLMs that work with text data and generate open-ended outputs have more possibilities for reference-free evaluation compared to traditional ML models, which often deal with tabular data or non-interpretable features. With LLMs outputs, it is possible to assess **specific properties** of generated text — such as tone, fluency, or safety — even without having an exact ground truth reference.  This is enabled through methods like **LLM judges** and **predictive ML scoring models**.
+
+**Read more**: [LLM Evaluation Guide](https://www.evidentlyai.com/llm-guide/llm-evaluation). Refer to this guide for additional explanations on different LLM evaluation workflows, such as comparative experiments, LLM stress-testing, red-teaming, and regression testing.
+
