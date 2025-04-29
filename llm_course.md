@@ -1,5 +1,7 @@
 # LLM evaluation and monitoring
 
+> Co-authored by the creators of Evidently ([GitHub](https://github.com/evidentlyai/evidently)), open-source ML and LLM evaluation framework with 25M+ downloads. 
+
 # Introduction to AI Evaluation
 
 When you build an AI system — whether it’s helping users write emails, answer questions, or generate code — you need to know: is it actually doing a good job? To figure that out, you need evaluations — or **"evals."** And not just once. Evaluations are essential throughout the entire AI system lifecycle.
@@ -27,8 +29,7 @@ In this chapter, we introduce two major types of AI tasks — **predictive (disc
 
 ## Discriminative vs Generative tasks 
 
-AI systems and models can be broadly divided into two categories: **discriminative** and **generative**.  
-Each serves a different purpose — and their evaluation methods reflect these differences.
+AI systems and models can be broadly divided into two categories: **discriminative** and **generative**. Each serves a different purpose — and their evaluation methods reflect these differences.
 
 ### Discriminative tasks
 
@@ -87,7 +88,7 @@ The process of evaluating discriminative systems is well-established and relativ
 
 **Ground truth dataset**. You make the evaluation by comparing model predictions against expected labels or scores. For that, you need a dataset that represents your use case. It can be manually labeled or curated from historical data. 
 
-In fact, such a dataset is a **prerequisite** for ML model development: you need it first to train the model itself! You then use part of this same dataset for evaluation. Typically, the data is split into:
+In fact, such a dataset is a prerequisite for ML model development: you need it first to train the model itself! You then use part of this same dataset for evaluation. Typically, the data is split into:
 - **Training set**: used to fit the model.  
 - **Validation (or development) set**: used to tune hyperparameters and guide model improvements.  
 - **Test set**: reserved for evaluating final model performance on unseen examples.  
@@ -96,7 +97,7 @@ For example, you might work with a collection of emails labeled as spam or not, 
 
 ### Evaluation metrics
 
-Depending on the type of task and the types of errors you prioritize, you can choose from several **standard evaluation metrics**. Here are examples based on the type of the task.
+Depending on the type of task and the types of errors you prioritize, you can choose from several standard evaluation metrics. Here are examples based on the type of the task.
 
 - **For regression tasks**, common evaluation metrics include:  
   - Mean Absolute Error (MAE)  
@@ -118,7 +119,7 @@ Depending on the type of task and the types of errors you prioritize, you can ch
   - Normalized Discounted Cumulative Gain (NDCG)  
   - Precision at K  
 
-**Further reading:** You can find more detailed guides on [Classification Metrics](https://www.evidentlyai.com/classification-metrics) and [Ranking Metrics](https://www.evidentlyai.com/ranking-metrics).
+> 📖**Further reading:** You can find more detailed guides on [Classification Metrics](https://www.evidentlyai.com/classification-metrics) and [Ranking Metrics](https://www.evidentlyai.com/ranking-metrics).
 
 While there is some diversity in metrics, the evaluation process for predictive systems is relatively straightforward: there is a single "right" answer and you can essentially quantify how many predictions were correct or close enough. (In tasks like multi-label classification, where multiple correct labels can apply to a single instance, similar metrics are adapted to evaluate across all relevant labels.)
 
@@ -135,7 +136,7 @@ You typically continue monitoring model quality by:
   - **Input data quality checks**, which helps make sure that incoming data is valid and not corrupted.
   - **Data drift monitoring**, which tracks changes in input data distributions to verify that the model operates in a familiar environment.
 
-**Further reading:** Learn more about [data drift](https://www.evidentlyai.com/ml-in-production/data-drift). 
+> 📖 **Further reading:** Learn more about [data drift](https://www.evidentlyai.com/ml-in-production/data-drift). 
 
 ### Evaluating LLM outputs
 
@@ -184,11 +185,12 @@ This workf for both **offline and online testing**, when obtaining references is
 
 Interestingly, LLMs that work with text data and generate open-ended outputs have more possibilities for reference-free evaluation compared to traditional ML models, which often deal with tabular data or non-interpretable features. With LLMs outputs, it is possible to assess **specific properties** of generated text — such as tone, fluency, or safety — even without having an exact ground truth reference.  This is enabled through methods like **LLM judges** and **predictive ML scoring models**.
 
-**Read more**: [LLM Evaluation Guide](https://www.evidentlyai.com/llm-guide/llm-evaluation). Refer to this guide for additional explanations on different LLM evaluation workflows, such as comparative experiments, LLM stress-testing, red-teaming, and regression testing.
+> 📖**Read more**: [LLM Evaluation Guide](https://www.evidentlyai.com/llm-guide/llm-evaluation).
+> Refer to this guide for additional explanations on different LLM evaluation workflows, such as comparative experiments, LLM stress-testing, red-teaming, and regression testing.
 
 ## Evaluation metrics and methods
 
-Some LLM evaluation metrics — just like traditional predictive metrics — apply only in reference-based scenarios. Other methods, such as using **LLM judges**, can be used in both reference-based** and reference-free evaluation.
+Some LLM evaluation metrics — just like traditional predictive metrics — apply only in reference-based scenarios. Other methods, such as using **LLM judges**, can be used in both reference-based and reference-free evaluation.
 
 Here are different LLM evaluation methods at a glance:
 
@@ -457,9 +459,9 @@ ROUGE typically includes two variants:
 - **ROUGE-L**: Measures the Longest Common Subsequence (LCS) — identifying the longest ordered set of words shared by both texts. This captures structural similarity and sentence-level alignment better than simple n-grams.
 
 **Example (Summarization)**  
-- **Reference**: “The movie was **<span style='color:green'>exciting and full of twists</span>**.”  
-- **Generated**: “The movie was **<span style='color:green'>full of exciting twists</span>**.”  
-- **ROUGE-L** would identify the **Longest Common Subsequence (LCS)** — the **overlapping phrase structure** shown in green.
+- **Reference**: “*The movie was* exciting and *full of twists**.”  
+- **Generated**: “*The movie was full of* exciting *twists*</span>**.”  
+- **ROUGE-L** would identify the **Longest Common Subsequence (LCS)** — the **overlapping phrase structure** shown in italic.
 
 **Limitations**. Like BLEU, ROUGE has important limitations:
 -  It relies on surface-level word matching, and does not recognize semantic similarity — for example, it may penalize “churn went down” vs. “churn decreased” even though they are equivalent.
@@ -511,11 +513,9 @@ Embeddings provide the foundation for similarity-based scoring. They represent w
 
 Word-level embeddings assign a fixed vector to each word based on its overall meaning. Popular models include **Word2Vec** and **GloVe**.
 
-Example:  
-“dog” and “puppy” will have similar embeddings due to their related meanings.
+Example: “dog” and “puppy” will have similar embeddings due to their related meanings.
 
-Limitation:  
-These embeddings ignore context. For example, the word “bank” has the same vector whether referring to a riverbank or a financial institution — which makes them less useful for nuanced evaluations.
+Limitation: These embeddings ignore context. For example, the word “bank” has the same vector whether referring to a riverbank or a financial institution — which makes them less useful for nuanced evaluations.
 
 #### Sentence-Level Embeddings
 
@@ -544,7 +544,6 @@ There are several ways to obtain embeddings, depending on your task and resource
   → Improves accuracy for specialized use cases.
 - Use dedicated sentence embedding tools like **Sentence-BERT**  
   → Optimized for tasks that involve comparing
-
 
 ## Model-Based Scoring
 
@@ -615,50 +614,34 @@ You can also consider training your own lightweight models on task-specific or d
 
 ## LLM-as-Judge
 
-Large Language Models can do more than generate text — they can also **evaluate** it. This approach, known as **LLM-as-Judge**, uses an LLM to assess text outputs based on custom criteria defined through prompts. It offers a **scalable**, **flexible**, and **cost-effective** alternative to human evaluation, especially for open-ended tasks.
+Large Language Models can do more than generate text — they can also evaluate it. This approach, known as LLM-as-Judge, uses an LLM to assess text outputs based on custom criteria defined through prompts. It has gained popularity because it offers a scalable, flexible, and cost-effective alternative to human evaluation, especially for open-ended tasks.
 
-To use an LLM as a “judge,” you provide it with **clear evaluation prompts** — similar to writing labeling instructions for a human annotator. These prompts define **what to evaluate** and **how to score** it.
+To use an LLM as a “judge,” you provide it with clear evaluation prompts — much like you would write labeling instructions for a human annotator. These prompts define what to evaluate and how to score it.
 
 ### How it works
 
-- **Define the task**  
-  Decide which aspects of the output the LLM should evaluate — such as factual accuracy, relevance, helpfulness, tone, etc. This should reflect your task outputs, failure modes, or quality criteria.
+- Define the task. Decide which aspects of the output the LLM should evaluate — such as factual accuracy against reference, relevance, helpfulness, tone, etc. This should be informed by your analysis of your task outputs and known failure modes or quality criteria you want to capture. 
+- Write the evaluation prompt. Create an instruction that explains what to assess, how to interpret each label or score, and what kind of result to return (e.g., a numeric score, a category, or an explanation or critique).
+- Run the evaluation. Provide the generated output — along with any relevant input, question, or reference — as part of the prompt and pass it to the LLM for evaluation.
+- Get the output. The LLM returns a score, label, or qualitative feedback based on your instruction
 
-- **Write the evaluation prompt**  
-  Create an instruction that explains what to assess, how to interpret each label or score, and what kind of result to return (e.g., a numeric score, category, or explanation).
-
-- **Run the evaluation**  
-  Provide the generated output — along with any relevant input, question, or reference — as part of the prompt and pass it to the LLM for evaluation.
-
-- **Get the output**  
-  The LLM returns a score, label, or qualitative feedback based on your instructions.
-
-LLM-as-Judge can be used for both **reference-based** and **reference-free** evaluations depending on whether a ground truth exists.
+You can use LLM-as-Judge for both reference-based and reference-free evaluations, depending on whether you have a ground truth to compare against or want to score outputs independently based on defined criteria.
 
 ## Reference-based evaluation
 
-You can use an LLM as a **semantic similarity judge** to compare generated responses against a **reference answer**.  
-This is useful for tasks like:
-- Question answering  
-- Retrieval-augmented generation (RAG)  
-- Any task where expected output is available
+You can use an LLM as a semantic similarity judge to compare generated responses against a reference answer. This approach is useful for tasks like question answering, retrieval-augmented generation (RAG), or any use case where an expected output is available.
 
-You pass both the new and target output to the LLM and ask if the new response is **correct**.
+Essentially, you pass both new and target output to the LLM and ask to define if the new response is correct.
 
-**Key advantage**:  
-Flexibility — you define what “correct” means:
-- Allowing omissions but not factual errors  
-- Prioritizing exact terminology  
-- Focusing on style consistency
+The key advantage of using an LLM as a judge is its flexibility — it allows you to define your own criteria for what counts as a “correct” response. You can tailor the evaluation to suit your goals: for example, allowing omissions but not factual deviations, prioritizing exact terminology, or focusing on style consistency. 
 
-You can also **assess multiple dimensions separately** — for example, factual content and textual style.
+You can also assess these aspects separately — for instance, evaluating whether two responses align in both factual content and textual style.
 
 ## Reference-free evaluation
 
-LLMs can also evaluate **open-ended outputs without references** — such as chatbot replies or creative content.  
-You ask the LLM to assess specific qualities **without a ground truth**.
+LLMs can also be used to evaluate open-ended outputs where there’s no reference — such as chatbot replies or creative text generation. Instead of comparing to a ground truth, you ask the LLM to assess specific qualities of the output on its own.
 
-**Qualities you can evaluate**:
+You can evaluate aspects such as:
 - Clarity — Is the response easy to understand?
 - Relevance — Does it address the input or stay on topic?
 - Actionability — Does it include next steps?
@@ -667,13 +650,9 @@ You ask the LLM to assess specific qualities **without a ground truth**.
 - Groundedness — Is the response based on context or hallucinated?
 - Bias — Is the content impartial and fair?
 
-**Advantage**:  
-Automates evaluation while tailoring it to your criteria. You're scaling **your own judgment** through prompt-based evaluation.
+The advantage of this approach is its ability to automate the evaluation process while tailoring it to your specific needs. Essentially, you're scaling your own judgment criteria through prompt-based evaluation. 
 
-To get the best results:
-- Start with manual review to identify key quality issues  
-- Design targeted test cases (e.g., adversarial prompts)  
-- Use scoring prompts to check model behavior
+To make the most of this method, it's helpful to start with manual analysis of your outputs. This helps you identify repeated failure modes or quality dimensions that matter for your use case. You can also design targeted testing scenarios — for instance, crafting adversarial prompts that intentionally provoke biased behavior, and then evaluating the outputs with a scoring prompt.
 
 ### Example: Bias Detection Prompt
 
