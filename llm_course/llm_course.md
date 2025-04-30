@@ -139,7 +139,7 @@ You typically continue monitoring model quality by:
 
 Whenever you use LLMs for predictive tasks, you can apply the same evaluation approaches as with traditional machine learning models — both offline and online. However, evaluating **generative tasks** is more complex. When multiple valid answers are possible, you can't simply check if an answer exactly matches a given reference. You need more complex comparative metrics as well as an option to evaluate more subjective quality dimensions such as clarity or helpfulness.
 
-> In the next chapter, we’ll introduce methods and tools for evaluating generative tasks.
+*In the next chapter, we’ll introduce methods and tools for evaluating generative tasks*.
 
 # Chapter 2: Evaluating generative systems
 
@@ -484,7 +484,7 @@ This has led to the development of more advanced alternatives:
 - **METEOR**: Incorporates synonyms, stemming, and word order alignment to better compare generated and reference texts. It improves on BLEU by being more forgiving of paraphrasing and word variation.
 - **Embedding-based metrics** (e.g., BERTScore): Use contextual embeddings to measure the semantic similarity between the generated output and the reference. These models move beyond surface-level overlap, making them more robust for evaluating meaning.
 
-> In the next chapter, we’ll explore model-based evaluation — from using embedding models to assess semantic similarity, to applying ML models that directly score the outputs.
+*In the next chapter, we’ll explore model-based evaluation — from using embedding models to assess semantic similarity, to applying ML models that directly score the outputs*.
 
 Let’s keep building your evaluation toolkit!
 
@@ -574,7 +574,7 @@ It’s particularly effective for tasks where context and phrasing matter, such 
 
 **Summing up** Similarity-based metrics  —  such as cosine similarity, BERTScore, and cross-encoder scoring  — offer powerful ways to evaluate generative models in reference-based settings by focusing on semantic similarity rather than exact wording. 
 
-Next, we’ll explore model-based scoring techniques that go beyond similarity — using ML models to assess specific output qualities like sentiment, toxicity, or factuality, and leveraging LLMs as evaluators through prompt-based judging.
+*Next, we’ll explore model-based scoring techniques that go beyond similarity — using ML models to assess specific output qualities like sentiment, toxicity, or factuality, and leveraging LLMs as evaluators through prompt-based judging*.
 
 ## Model-Based Scoring
 
