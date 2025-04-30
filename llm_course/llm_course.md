@@ -156,6 +156,8 @@ There are two main evaluation workflows, depending on the stage and nature of yo
 
 ### Reference-based evaluation
 
+![](images/llm_evidently_img8-min.png)
+
 This approach relies on having **ground truth answers**, and evaluation measures if the new outputs match the ground truth. Essentially, it follows the same principles as in traditional predictive system evaluation.
 
 Reference-based evaluations are conducted **offline**:
@@ -171,6 +173,8 @@ Since multiple valid answers are often possible, you cannot rely solely on exact
 > We’ll cover specific approaches in the following sections.
 
 ### Reference-free evaluation
+
+![](images/llm_evidently_img3-min.png)
 
 Reference-free methods directly assign quantitative scores or labels to the generated outputs without needing a ground truth answer.
 
@@ -190,6 +194,8 @@ Interestingly, LLMs that work with text data and generate open-ended outputs hav
 Some LLM evaluation metrics — just like traditional predictive metrics — apply only in reference-based scenarios. Other methods, such as using **LLM judges**, can be used in both reference-based and reference-free evaluation.
 
 Here are different LLM evaluation methods at a glance:
+
+![](images/llm_evidently_img5-min.png)
 
 > 📖 **Source**: [LLM Evaluation Metrics Guide](https://www.evidentlyai.com/llm-guide/llm-evaluation-metrics).  
 > You can refer to this guide for additional explanations on different LLM evaluation metrics.
@@ -230,8 +236,9 @@ In other cases, you may need more complex aggregation logic. For instance:
 - Set a threshold (e.g., flag any output with a semantic similarity score < 0.85 as "incorrect")  
 - Calculate the share of correct responses based on that rule  
 
-> When exploring evaluation methods below, we will focus primarily on **row-level evaluations**.  
-> However, it is important to keep in mind your **aggregation strategy** as you run evals across multiple inputs in your dataset.
+When exploring evaluation methods below, we will focus primarily on **row-level evaluations**. However, it is important to keep in mind your **aggregation strategy** as you run evals across multiple inputs in your dataset.
+
+![](images/llm_evidently_img4-min.png)
 
 # Chapter 3: Deterministic evaluations
 
@@ -422,6 +429,7 @@ For example, in summarization, you might compare a generated summary to a human-
 
 To handle this, the machine learning community developed overlap-based metrics like BLEU and ROUGE. These measure how much the generated text shares in common with the reference — based on words, n-grams, or phrase order.
 
+![](images/llm_evidently_img6-min.png)
 
 ### BLEU (Bilingual Evaluation Understudy)
 
@@ -545,6 +553,29 @@ There are several ways to obtain embeddings, depending on your task and resource
 - Use dedicated sentence embedding tools like **Sentence-BERT**  
   → Optimized for tasks that involve comparing
 
+Once you’ve generated embeddings for your inputs and outputs, the next step is to compare them using a similarity metric. We’ll now look at the most commonly used methods.
+
+![](images/llm_evidently_img10-min.png)
+
+**Cosine similarity** is a straightforward metric that measures the angle between two vectors in embedding space. It captures how closely aligned the vectors are, providing a score that reflects their semantic similarity.
+
+For example, if the reference text is “I agree to purchase the software license” and the generated text is “I’m okay with moving forward with the software purchase,” cosine similarity would assign a high score. While the wording differs, the intent and meaning are the same — confirming agreement to buy. This makes cosine similarity a valuable tool for identifying semantic alignment even when surface phrasing varies.
+
+It is computationally efficient and widely used for tasks like semantic search, ranking, and clustering in NLP applications.
+
+**BERTScore** offers a more nuanced evaluation by going beyond direct comparisons of entire sentence embeddings. It aligns tokens in the reference and generates texts using contextual embeddings from models like BERT. The metric then computes precision, recall, and F1 scores at the token level, based on the similarity of these embeddings — making it well-suited for identifying subtle semantic equivalence.
+> **Example**: If the reference text is “We decided to approve the proposal,” and the generated text is “The team agreed to move forward with the plan,” BERTScore recognizes semantic > matches like “approve” ↔ “move forward” and “proposal” ↔ “plan.”
+
+It’s particularly effective for tasks where context and phrasing matter, such as summarization, paraphrasing, or content generation.
+
+**Cross-Encoder Scoring**. Another advanced approach is Cross-Encoder Scoring. Unlike methods like cosine similarity, which compare independently generated embeddings, a cross-encoder jointly encodes both texts and evaluates their relationship in context. This approach allows the model to directly compare words and phrases across the two texts during processing, leading to a deeper understanding of their semantic alignment. While this method is computationally more expensive, it often yields higher accuracy for tasks such as paraphrase detection, semantic matching, or FAQ retrieval.
+
+> **Example**: If the reference query is “How do I change my password?” and the generated response is “What steps should I follow to update my login credentials?”, a cross-encoder > would recognize the shared intent and assign a high similarity score, even though the exact words differ.
+
+**Summing up** Similarity-based metrics  —  such as cosine similarity, BERTScore, and cross-encoder scoring  — offer powerful ways to evaluate generative models in reference-based settings by focusing on semantic similarity rather than exact wording. 
+
+Next, we’ll explore model-based scoring techniques that go beyond similarity — using ML models to assess specific output qualities like sentiment, toxicity, or factuality, and leveraging LLMs as evaluators through prompt-based judging.
+
 ## Model-Based Scoring
 
 Another approach to evaluation is using narrow predictive models — either pre-trained or trained in-house — to score specific qualities of the generated output. These models can focus on evaluating attributes such as **sentiment**, **toxicity**, or presence of **sensitive information (PII)**.
@@ -633,9 +664,13 @@ You can use an LLM as a semantic similarity judge to compare generated responses
 
 Essentially, you pass both new and target output to the LLM and ask to define if the new response is correct.
 
+![](images/llm_evidently_img1-min.png)
+
 The key advantage of using an LLM as a judge is its flexibility — it allows you to define your own criteria for what counts as a “correct” response. You can tailor the evaluation to suit your goals: for example, allowing omissions but not factual deviations, prioritizing exact terminology, or focusing on style consistency. 
 
 You can also assess these aspects separately — for instance, evaluating whether two responses align in both factual content and textual style.
+
+![](images/llm_evidently_img9-min.png)
 
 ## Reference-free evaluation
 
@@ -651,6 +686,8 @@ You can evaluate aspects such as:
 - Bias — Is the content impartial and fair?
 
 The advantage of this approach is its ability to automate the evaluation process while tailoring it to your specific needs. Essentially, you're scaling your own judgment criteria through prompt-based evaluation. 
+
+![](images/llm_evidently_img7-min.png)
 
 To make the most of this method, it's helpful to start with manual analysis of your outputs. This helps you identify repeated failure modes or quality dimensions that matter for your use case. You can also design targeted testing scenarios — for instance, crafting adversarial prompts that intentionally provoke biased behavior, and then evaluating the outputs with a scoring prompt.
 
@@ -696,7 +733,12 @@ This helps you surface possible gaps in your knowledge base or inefficiencies in
 > **Example**. If the document says “Employees are eligible for paid time off after 90 days,” but the system answers “Employees are eligible for unlimited paid time off,” this should be flagged. The “unlimited” detail is hallucinated and unsupported.
 - **Refusals**. How often does the system decline to answer? This will help assess the user experience by flagging questions that are left unanswered.
 
-These evaluation aspects do not require reference response — which makes them especially useful for monitoring in production. You can also assess additional properties when you conduct offline evaluations using designed test cases that target specific scenarios.
+These evaluation aspects do not require reference response — which makes them especially useful for monitoring in production. 
+
+Here is an example of evaluating the validity of the context ("does it help answer the question?")
+![](images/llm_evidently_img2-min.png)
+
+You can also assess additional properties when you conduct offline evaluations using designed test cases that target specific scenarios.
 
 **Refusal testing** is a useful indicator of whether the system avoids hallucinations while remaining helpful. You can test your RAG system for:
 - **Correct denials**. Does the system appropriately decline to answer when the retrieved context lacks sufficient information?
@@ -722,6 +764,8 @@ You can use it to evaluate task execution along multiple dimensions. For example
 
 - **Correct Tool Use**. Did the agent invoke the appropriate tools or APIs to complete the action?
 > **Example**.If the user asks to add an event to their calendar, the agent should select the correct calendar tool (e.g., Google Calendar or Outlook) based on the user’s context — and avoid hallucinating unsupported or unexpected commands.
+
+![](images/llm_evidently_img11-min.png)
 
 **Session-level evaluation**. Agent behavior often unfolds over multi-step interactions, not just single responses. To properly evaluate such systems, it's important to assess the entire session or conversation, rather than isolated outputs.
 
@@ -860,6 +904,8 @@ You can configure alerts to trigger immediately, or set rules based on patterns 
 This gives you an early warning system so that you can intervene on time.
 
 ## Evaluation Feedback Loop
+
+![](images/llm_evidently_img12-min.png)
 
 Monitoring and evaluation are not just for detecting issues — they form the foundation for continuous improvement. A robust evaluation loop becomes a flywheel that drives AI product evolution at every stage, from your first prompt experiments to large-scale deployment.
 
