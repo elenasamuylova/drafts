@@ -567,11 +567,11 @@ It’s particularly effective for tasks where context and phrasing matter, such 
 
 ## Model-based scoring
 
-Another approach to evaluation is using narrow predictive models — either pre-trained or trained in-house — to score specific qualities of the generated output. These models can focus on evaluating attributes such as **sentiment**, **toxicity**, or presence of **sensitive information (PII)**.
+Another approach to evaluation is using narrow predictive models — either pre-trained or trained in-house — to score specific qualities of the generated output. These models can focus on evaluating attributes such as sentiment, toxicity, or presence of sensitive information (PII).
 
 This method is especially useful when you care about one well-defined dimension of quality, and it offers a scalable and automated solution for high-volume analysis.
 
-### Sentiment Scoring
+### Sentiment scoring
 
 Sentiment scoring evaluates the emotional tone of the generated text. It is commonly used in applications like:
 - Chatbots  
