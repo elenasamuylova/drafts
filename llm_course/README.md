@@ -453,7 +453,7 @@ This combination of n-gram precision and brevity adjustment makes BLEU a widely 
 > \text{BLEU} = \mathrm{brevity\_penalty} \cdot \exp\left( \sum_n \mathrm{precision\_score}(n\text{-grams}) \right)
 > $$
 
-**Limitations** While BLEU is a popular metric, it has some notable limitations. 
+**Limitations**. While BLEU is a popular metric, it has some notable limitations. 
 - First, it relies heavily on exact word matching, which means it penalizes valid synonyms or paraphrases. For example, it would score “The dog barked” differently from “The puppy barked,” even though they mean similar things.
 - Additionally, BLEU ignores sentence structure and semantic meaning, focusing only on word overlap. This can lead to misleading results when evaluating the overall quality or coherence of text.
 - Finally, BLEU works best for short, task-specific texts like translations, where there’s a clear reference to compare against. However, it struggles with open-ended generative outputs, such as creative writing or dialogue, where multiple valid responses might exist.
