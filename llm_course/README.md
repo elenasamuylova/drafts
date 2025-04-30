@@ -313,7 +313,7 @@ $$
 - Include required language for specific tasks (e.g., legal disclaimers)
 
 > **Example**:
-> For a financial advice assistant, you may check whether outputs include required disclaimers like “this does not constitute financial advice.” Similarly, for a healthcare chatbot, you might verify the presence of phrases such as “consult a licensed medical professional” to ensure safety and compliance.
+> For a financial assistant, you may check whether outputs include required disclaimers like “this does not constitute financial advice.” Similarly, for a healthcare chatbot, you might verify the presence of phrases such as “consult a licensed medical professional” to ensure safety and compliance.
 
 **How it’s measured**. Use a predefined list of words or phrases and scan the generated text for TRUE/FALSE matches.
 
@@ -351,7 +351,7 @@ This is useful both in offline experiments and in live production, where it can 
 
 **What it checks**. Whether the generated text contains at least one valid URL.
 
-**When it’s useful** To verify that a link is present when you expect it to, in outputs like emails, chatbot replies, or content generation.
+**When it’s useful**. To verify that a link is present when you expect it to, in outputs like emails, chatbot replies, or content generation.
 
 > **Example**  
 > ✅ “Visit us at https://example.com”
@@ -361,10 +361,9 @@ This is useful both in offline experiments and in live production, where it can 
 
 ### JSON schema match
 
-**What it checks**. Whether a JSON object in the output **matches a predefined schema**.
+**What it checks**. Whether a JSON object in the output matches a predefined schema.
 
-**When it’s useful**. Whether a JSON object in the output matches a predefined schema.
-When it’s useful: Whenever you deal with structured generation and instruct an LLM to return the output of a specific format. This helps verify that JSON outputs not only follow syntax rules but also match the expected structure, including required fields and value types.
+**When it’s useful**. Whenever you deal with structured generation and instruct an LLM to return the output of a specific format. This helps verify that JSON outputs not only follow syntax rules but also match the expected structure, including required fields and value types.
 
 > **Schema example**  
 > ```json
@@ -374,19 +373,19 @@ When it’s useful: Whenever you deal with structured generation and instruct an
 > ✅ Matches: `{"name": "Alice", "age": 25}`  
 > ❌ Doesn’t match: `{"name": "Alice", "age": "twenty-five"}`
 
-**How it’s measured**: use tools like Python’s `jsonschema` for structural validation.
+**How it’s measured**. use tools like Python’s `jsonschema` for structural validation.
 
 ### JSON match
 
-**What it checks**: Whether a JSON object matches an expected reference JSON.
+**What it checks**. Whether a JSON object matches an expected reference JSON.
 
-**When it’s useful**: In reference-based (offline) evaluations, where the model is expected to produce structured outputs. For example, in tasks like entity extraction, you may want to verify that all required entities are correctly extracted from the input text — compared to a known reference JSON with correct entities.
+**When it’s useful**. In reference-based (offline) evaluations, where the model is expected to produce structured outputs. For example, in tasks like entity extraction, you may want to verify that all required entities are correctly extracted from the input text — compared to a known reference JSON with correct entities.
 
-**How it’s measured**: First, check that the output is valid JSON and schema matches. Then, compare the content of the fields, regardless of order, to determine if the output semantically matches the reference.
+**How it’s measured**. First, check that the output is valid JSON and schema matches. Then, compare the content of the fields, regardless of order, to determine if the output semantically matches the reference.
 
 ### Check for a valid SQL
 
-**What it checks**. Whether the generated text is a **syntactically valid SQL query**.
+**What it checks**. Whether the generated text is a syntactically valid SQL query.
 
 **When it’s useful**  In SQL generation tasks.
 
@@ -398,9 +397,9 @@ When it’s useful: Whenever you deal with structured generation and instruct an
 
 ### Check for a valid Python
 
-**What it checks**. Whether the output is **syntactically valid Python code**.
+**What it checks**. Whether the output is syntactically valid Python code.
 
-**When it’s useful** In tasks where generative models produce executable code. Ensures output can be parsed and run without syntax errors.
+**When it’s useful**. In tasks where generative models produce executable code. Ensures output can be parsed and run without syntax errors.
 
 > **Example**  
 > ✅  
@@ -414,8 +413,7 @@ When it’s useful: Whenever you deal with structured generation and instruct an
 >     return a +
 > ```
 
-**How it’s measured**  
-Use Python’s built-in modules (e.g., `ast.parse()`) to attempt parsing. If a `SyntaxError` is raised, the code is invalid.
+**How it’s measured**. Use Python’s built-in modules (e.g., `ast.parse()`) to attempt parsing. If a `SyntaxError` is raised, the code is invalid.
 
 Pattern-based evaluators like these help validate whether generative outputs align with specific formats or functional requirements. They are especially useful in scenarios where the output must be used directly in applications like APIs, data pipelines, or code execution environments. 
 
@@ -507,9 +505,9 @@ To evaluate semenatic similarity, you typically follow two main steps:
 - Generate embeddings for the inputs — such as the reference and the generated response.
 - Measure similarity between them to assess how closely their meanings align.
 
-**When this method is useful**:
-- **Reference comparison**: Evaluate whether the generated output conveys the same meaning as the reference, even if the phrasing is different.
-- **Relevance and groundedness**: Works in reference-free settings, where you assess how relevant a response is to a user’s query or the retrieved context.
+This method is useful for:
+- **Reference comparison**. Evaluate whether the generated output conveys the same meaning as the reference, even if the phrasing is different.
+- **Relevance and groundedness**. Works in reference-free settings, where you assess how relevant a response is to a user’s query or the retrieved context.
 
 For example, measuring the semantic similarity between the model’s output and the retrieved context can serve as a proxy for detecting hallucinations in RAG systems.
 
@@ -517,15 +515,15 @@ For example, measuring the semantic similarity between the model’s output and 
 
 Embeddings provide the foundation for similarity-based scoring. They represent words, sentences, or documents as vectors in a high-dimensional space — capturing semantic relationships in texts. Different types of embeddings serve different purposes and levels of granularity. Choosing the right one depends on the structure and complexity of the task you’re evaluating.
 
-**Word-Level Embeddings**. Word-level embeddings assign a fixed vector to each word based on its overall meaning. Popular models include **Word2Vec** and **GloVe**.
+**Word-Level embeddings** assign a fixed vector to each word based on its overall meaning. Popular models include **Word2Vec** and **GloVe**.
 
 > **Example**: “dog” and “puppy” will have similar embeddings due to their related meanings.
 
-Limitation: These embeddings ignore context. For example, the word “bank” has the same vector whether referring to a riverbank or a financial institution — which makes them less useful for nuanced evaluations.
+The limitation is that these embeddings ignore context. For example, the word “bank” has the same vector whether referring to a riverbank or a financial institution — which makes them less useful for nuanced evaluations.
 
-**Sentence-Level Embeddings**. Sentence embeddings combine the meanings of individual words to produce a single vector for a full sentence. Common tools include **Sentence-BERT** and **Universal Sentence Encoder**. These embeddings are particularly useful for tasks that involve longer text units, such as evaluating the coherence of summaries, comparing paragraphs, or analyzing conversational responses.
+**Sentence-Level embeddings**. Sentence embeddings combine the meanings of individual words to produce a single vector for a full sentence. Common tools include **Sentence-BERT** and **Universal Sentence Encoder**. These embeddings are particularly useful for tasks that involve longer text units, such as evaluating the coherence of summaries, comparing paragraphs, or analyzing conversational responses.
 
-**Contextualized Embeddings**. Contextualized embeddings are generated by models like **BERT** or **GPT**, which produce vectors that adapt based on how words are used in context.
+**Contextualized embeddings** are generated by models like **BERT** or **GPT**, which produce vectors that adapt based on how words are used in context.
 
 > **Example**:
 > - “He went to the bank to fish”
@@ -543,7 +541,7 @@ These embeddings are especially powerful for dialogue evaluation, grounded respo
 - Use dedicated sentence embedding tools like **Sentence-BERT**  
   → Optimized for tasks that involve comparing
 
-Once you’ve generated embeddings for your inputs and outputs, the next step is to compare them using a similarity metric. We’ll now look at the most commonly used methods.
+Once you’ve generated embeddings for your inputs and outputs, the next step is to compare them using a similarity metric. Let's look at the most commonly used methods.
 
 ![](images/llm_evidently_img10-min.png)
 
