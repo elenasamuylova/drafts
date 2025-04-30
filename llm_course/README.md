@@ -1,6 +1,8 @@
 # LLM evaluation and monitoring
 
-> Co-authored by the creators of Evidently ([GitHub](https://github.com/evidentlyai/evidently)), open-source ML and LLM evaluation framework with 25M+ downloads. 
+> Co-authored by the creators of Evidently ([GitHub](https://github.com/evidentlyai/evidently)), open-source ML and LLM evaluation framework with 25M+ downloads.
+
+Together with this theoretical introduction, you can explore a [practical Python example on different LLM evaluation methods](Intro_to_LLM_evaluations.ipynb).
 
 # Introduction to AI Evaluation
 
