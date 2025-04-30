@@ -16,7 +16,7 @@ But things get more complex with LLM-powered applications. Instead of predicting
 
 Instead, you're often dealing with a range of possible responses — some better than others. Quality also often involves more subjective criteria, like tone, clarity, helpfulness. For example:
 
-- If an AI writes an email, how do you know it’s not just correct, but actually moves the conversation forward or resolves the issue?
+- If an AI writes an email, how do you know it’s not just grammatically correct, but actually moves the conversation forward or resolves the issue?
 - If an AI answers questions about internal processes, how do you know it's accurate, up-to-date, and truly useful?
 
 These kinds of tasks are what make generative systems so powerful — you can automate entirely new kinds of work. But this also adds significant complexity when it comes to evaluation.
