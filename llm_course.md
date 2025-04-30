@@ -14,18 +14,18 @@ This need for evaluation isn’t new. In fact, it’s a well-established practic
 
 But things get more complex with LLM-powered applications. Instead of predicting a single outcome, these systems often help write text, summarize articles, translate languages, etc. And in these cases, there isn’t always one "correct" answer.  
 
-Instead, you're often dealing with a range of possible responses — some better than others. Quality also often involves more subjective criteria, like **tone**, **clarity**, **helpfulness**. For example:
+Instead, you're often dealing with a range of possible responses — some better than others. Quality also often involves more subjective criteria, like tone, clarity, helpfulness. For example:
 
-- If an AI generates code, how do you know it's not only correct, but also secure and efficient?  
-- If an AI answers questions about your company's internal processes, how can you be sure it is accurate, up-to-date and is genuinely helpful to the user?
+- If an AI writes an email, how do you know it’s not just correct, but actually moves the conversation forward or resolves the issue?
+- If an AI answers questions about internal processes, how do you know it's accurate, up-to-date, and truly useful?
 
 These kinds of tasks are what make generative systems so powerful — you can automate entirely new kinds of work. But this also adds significant complexity when it comes to evaluation.
 
-> In this guide, we’ll explore how to evaluate AI systems built with large language models — from development to real-world monitoring.
+*In this guide, we’ll explore how to evaluate AI systems built with large language models — from development to real-world monitoring.*
 
 # Chapter 1: Basics of AI system evaluation
 
-In this chapter, we introduce two major types of AI tasks — **predictive (discriminative)** and **generative** — and explain how they shape the evaluation process. We also briefly cover how predictive systems are typically evaluated to learn from existing foundations.
+In this chapter, we introduce different types of AI tasks — and explain how they shape the evaluation process. We also briefly cover how predictive systems are typically evaluated to learn from existing foundations.
 
 ## Discriminative vs Generative tasks 
 
@@ -33,9 +33,9 @@ AI systems and models can be broadly divided into two categories: **discriminati
 
 ### Discriminative tasks
 
-Discriminative models focus on **making decisions or predictions**.
+Discriminative models focus on making decisions or predictions.
 
-They take input data and classify it into predefined categories or predict numerical outcomes. In simpler terms, they’re great at answering **"yes or no," "which one," or "how many"** questions.
+They take input data and classify it into predefined categories or predict numerical outcomes. In simpler terms, they’re great at answering "yes or no," "which one," or "how many" questions.
 
 **Examples:**
 - Classifying images as cat or dog.  
@@ -43,19 +43,18 @@ They take input data and classify it into predefined categories or predict numer
 - Identifying the sentiment of a movie review as positive or negative.  
 - Predicting sales volumes.  
 
-You can think of discriminative models as decision-makers. Their goal is to **predict the target variable** given a set of input features.
+You can think of discriminative models as decision-makers. Their goal is to predict the target variable given a set of input features.
 
-**Common categories of tasks include:**
+Common categories of tasks include:
 - **Classification**: Predicting discrete labels (e.g., fraud vs. not fraud)  
 - **Regression**: Predicting continuous values (e.g., monthly revenue)  
 - **Ranking**: Predicting the relative ordering of items (e.g., search, recommendations)  
 
-You would typically train narrow ML models on your own historical data to solve such predictive tasks. But you can also use pre-trained models — including LLMs — for some of these.  
-For example, use an LLM to classify support queries into a set of predefined topics. In these cases, you can apply the same evaluation approaches as you would with traditional ML models.
+You would typically train narrow ML models on your own historical data to solve such predictive tasks. But you can also use pre-trained models — including LLMs — for some of these.  For example, use an LLM to classify support queries into a set of predefined topics. In these cases, you can apply the same evaluation approaches as you would with traditional ML models.
 
 ### Generative tasks
 
-Generative models, on the other hand, **create new data** that resembles the data they were trained on. Instead of classifying or predicting, they generate content — such as text, images, code, conversations, or even music.
+Generative models, on the other hand, create new data that resembles the data they were trained on. Instead of classifying or predicting, they generate content — such as text, images, code, conversations, or even music.
 
 **Examples:**
 - Writing a creative story  
@@ -64,9 +63,9 @@ Generative models, on the other hand, **create new data** that resembles the dat
 - Translating text from one language to another  
 - Drafting a response to an email using the provided information  
 
-Generative models are **creators**. They learn the underlying patterns in the data and use that to produce something new.
+Generative models are creators. They learn the underlying patterns in the data and use that to produce something new.
 
-#### Quick Comparison: Discriminative vs. Generative Tasks
+**Quick Comparison: Discriminative vs. Generative Tasks**
 
 |                        | **Discriminative Tasks**       | **Generative Tasks**            |
 |------------------------|-------------------------------|----------------------------------|
@@ -74,9 +73,7 @@ Generative models are **creators**. They learn the underlying patterns in the da
 | **Output**             | Labels, scores or predictions  | Text, code, images, or audio     |
 | **Evaluation**         | Clear, objective metrics       | Complex, subjective metrics      |
 
-Many modern applications of LLMs including AI agents and chatbots fall under **generative tasks**.
-
-Before we dive into evaluating generative tasks, let’s first quickly review how this works for more traditional **predictive (discriminative)** systems. This helps with understanding core evaluation principles.
+Many modern applications of LLMs including AI agents and chatbots fall under generative tasks. However, before we dive into evaluating them, let’s first quickly review how this works for more traditional predictive (discriminative) systems. This helps with understanding core evaluation principles.
 
 ## Evaluating predictive systems
 
@@ -84,11 +81,11 @@ The process of evaluating discriminative systems is well-established and relativ
 
 ### Evaluation process
 
-**Offline evaluation**. Evaluation typically happens **offline**: you run an evaluation script or pipeline as you experiment and build your ML model. You assess its performance using a designated **test dataset**.
+**Offline evaluation**. Evaluation typically happens offline: you run an evaluation script or pipeline as you experiment and build your ML model. You assess its performance using a designated test dataset.
 
-**Ground truth dataset**. You make the evaluation by comparing model predictions against expected labels or scores. For that, you need a dataset that represents your use case. It can be manually labeled or curated from historical data. 
+**Test dataset**. The test dataset contains "groud truth" labels or values for a set of known test inputs. You make the evaluation by comparing model predictions against what's expected. This test dataset that represents your use case can be manually labeled or curated from historical data. 
 
-In fact, such a dataset is a prerequisite for ML model development: you need it first to train the model itself! You then use part of this same dataset for evaluation. Typically, the data is split into:
+In fact, having this dataset is a prerequisite for ML model development: you need it first to train the model itself! You then use part of this same dataset for evaluation. Typically, the data is split into:
 - **Training set**: used to fit the model.  
 - **Validation (or development) set**: used to tune hyperparameters and guide model improvements.  
 - **Test set**: reserved for evaluating final model performance on unseen examples.  
