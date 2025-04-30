@@ -25,7 +25,7 @@ These kinds of tasks are what make generative systems so powerful — you can au
 
 # Chapter 1: Basics of AI system evaluation
 
-In this chapter, we introduce different types of AI tasks — and explain how they shape the evaluation process. We also briefly cover how predictive systems are typically evaluated to learn from existing foundations.
+*In this chapter, we introduce different types of AI tasks — and explain how they shape the evaluation process. We also briefly cover how predictive systems are typically evaluated to learn from existing foundations*.
 
 ## Discriminative vs Generative tasks 
 
@@ -145,14 +145,14 @@ Whenever you use LLMs for predictive tasks, you can apply the same evaluation ap
 
 When building generative systems, the typical starting point is **manual evaluation**, where you manually review or label outputs. This step is essential: manual labeling helps you understand the types of errors your system produces and define your quality criteria. However, manual evaluation has limited scalability, especially when you run iterative experiments like trying different versions of prompts. **Automated evaluations** help speed up and scale the process. 
 
-In this chapter, we will discuss approaches to automated evaluation of LLM system outputs, and types of metrics you can use.
+*In this chapter, we will discuss approaches to automated evaluation of LLM system outputs, and types of metrics you can use*.
 
 ## Reference-based vs Reference-free evaluations
 
 There are two main evaluation workflows, depending on the stage and nature of your AI system:
 
-- **Reference-based evaluation**  
-- **Reference-free evaluation**
+- Reference-based evaluation
+- Reference-free evaluation
 
 ### Reference-based evaluation
 
@@ -170,7 +170,7 @@ It is important to expand your golden set over time to keep it relevant as your 
 
 Since multiple valid answers are often possible, you cannot rely solely on exact match metrics. Instead, specialized methods such as **semantic similarity scoring** or **LLM-as-a-judge** are used to assess the closeness or correctness of the model's outputs relative to the reference.
 
-> We’ll cover specific approaches in the following sections.
+*We’ll cover specific approaches in the following sections*.
 
 ### Reference-free evaluation
 
@@ -184,14 +184,14 @@ This workf for both **offline and online testing**, when obtaining references is
 - In production settings, where outputs are evaluated in real time  
 - In certain evaluation scenarios like adversarial testing, where you assess the expected properties of an answer (e.g., by evaluating that it does not have any toxicity or bias)
 
-Interestingly, LLMs that work with text data and generate open-ended outputs have more possibilities for reference-free evaluation compared to traditional ML models, which often deal with tabular data or non-interpretable features. With LLMs outputs, it is possible to assess **specific properties** of generated text — such as tone, fluency, or safety — even without having an exact ground truth reference.  This is enabled through methods like **LLM judges** and **predictive ML scoring models**.
+Interestingly, LLMs that work with text data and generate open-ended outputs have more possibilities for reference-free evaluation compared to traditional ML models, which often deal with tabular data or non-interpretable features. With LLMs outputs, it is possible to assess specific properties of generated text — such as tone, fluency, or safety — even without having an exact ground truth reference.  This is enabled through methods like **LLM judges** and **predictive ML scoring models**.
 
 > 📖**Read more**: [LLM Evaluation Guide](https://www.evidentlyai.com/llm-guide/llm-evaluation).
 > Refer to this guide for additional explanations on different LLM evaluation workflows, such as comparative experiments, LLM stress-testing, red-teaming, and regression testing.
 
 ## Evaluation metrics and methods
 
-Some LLM evaluation metrics — just like traditional predictive metrics — apply only in reference-based scenarios. Other methods, such as using **LLM judges**, can be used in both reference-based and reference-free evaluation.
+Some LLM evaluation metrics — just like traditional predictive metrics — apply only in reference-based scenarios. Other methods, such as using LLM judges, can be used in both reference-based and reference-free evaluation.
 
 Here are different LLM evaluation methods at a glance:
 
@@ -228,7 +228,7 @@ One more important distinction to make before we move into specific examples is 
 
 These numerical or categorical scores can be called **descriptors**. You can assign multiple descriptors to each input (or even a full conversation), evaluating aspects like relevance, tone, and safety at once.
 
-**Score aggregation**. When working with row-level descriptors, you still need a way to combine individual scores into a performance summary across your test inputs.Sometimes it’s simple, such as:
+**Score aggregation**. When working with row-level descriptors, you still need a way to combine individual scores into a performance summary across your test inputs. Sometimes it’s simple, such as:
 - Averaging numerical scores  
 - Counting the share of outputs that have a "good" label  
 
@@ -236,7 +236,7 @@ In other cases, you may need more complex aggregation logic. For instance:
 - Set a threshold (e.g., flag any output with a semantic similarity score < 0.85 as "incorrect")  
 - Calculate the share of correct responses based on that rule  
 
-When exploring evaluation methods below, we will focus primarily on **row-level evaluations**. However, it is important to keep in mind your **aggregation strategy** as you run evals across multiple inputs in your dataset.
+When exploring evaluation methods below, we will focus primarily on row-level evaluations. However, it is important to keep in mind your aggregation strategy as you run evals across multiple inputs in your dataset.
 
 ![](images/llm_evidently_img4-min.png)
 
@@ -248,7 +248,7 @@ These simple methods matter. Evaluating generative systems doesn’t always requ
 
 ## Text statistics
 
-**Text statistics** are numerical descriptive metrics that capture properties of the generated output — such as its length. They are **reference-free**, meaning they can be computed without needing a ground truth response. This makes them useful for lightweight monitoring in production.
+Text statistics are numerical descriptive metrics that capture properties of the generated output — such as its length. They are reference-free, meaning they can be computed without needing a ground truth response. This makes them useful for lightweight monitoring in production.
 
 ### Text Length
 
@@ -258,11 +258,11 @@ These simple methods matter. Evaluating generative systems doesn’t always requ
 - Sentence count  
 - Word count
 
-**When it is useful**  This is useful for tasks like content generation (especially when length constraints exist) or summarization, where excessively short or long outputs may indicate problems. For instance, too short responses may lack fluency, while overly long ones may include hallucinations or irrelevant content.
+**When it is useful**. This is useful for tasks like content generation (especially when length constraints exist) or summarization, where excessively short or long outputs may indicate problems. For instance, too short responses may lack fluency, while overly long ones may include hallucinations or irrelevant content.
 
-Verifying text length is especially relevant in applications like Q&A systems or in-product text generation, where display space is constrained. Instructions about the desired length of a response are often included in the prompt — for example, you may be asking the system to “answer in 2–3 sentences.” You can use text length metrics to verify whether the output aligns with the prompt’s expectations.
+Verifying text length is also relevant in applications like Q&A systems or in-product text generation, where display space is constrained. Instructions about the desired length of a response are often included in the prompt — for example, you may be asking the system to “answer in 2–3 sentences.” You can use text length metrics to verify whether the output aligns with the prompt’s expectations.
 
-**Example**  
+> **Example**  
 > “Your meeting with the product team is confirmed for Thursday at 2 PM. Let me know if you’d like to reschedule.”  
 > Character length: 102 (including spaces and punctuation), word count: 18, sentence count: 2
 
@@ -279,10 +279,10 @@ Verifying text length is especially relevant in applications like Q&A systems or
 - Spammy or obfuscated content (e.g., in adversarial inputs)
 - Unexpected language use in applications expecting English-only responses
 
-**Example**  
+> **Example**  
 > “Xylofoo is a grfytpl.” → High OOV rate flags made-up words
 
-**Formula**  
+**How it's measured**. You can import vocabularies from tools like NLTK. 
 
 $$
 \text{OOV Rate} = \left( \frac{\text{Number of OOV Words}}{\text{Total Words}} \right) \times 100
@@ -294,10 +294,10 @@ $$
 
 **When it is useful**. for spotting unnatural output, spam-like formatting, or unexpected formats like HTML or code snippets.  
 
-**Example**  
+> **Example**  
 > “Welcome!!! Visit @website_123” → High non-letter ratio
 
-**Formula**  
+**How it's measured**.
 
 $$
 \text{Non-Letter Percentage} = \left( \frac{\text{Non-Letter Characters}}{\text{Total Characters}} \right) \times 100
@@ -312,7 +312,8 @@ $$
 - Avoid inappropriate or banned terms
 - Include required language for specific tasks (e.g., legal disclaimers)
 
-**Example**: For a financial advice assistant, you may check whether outputs include required disclaimers like “this does not constitute financial advice.” Similarly, for a healthcare chatbot, you might verify the presence of phrases such as “consult a licensed medical professional” to ensure safety and compliance.
+> **Example**:
+> For a financial advice assistant, you may check whether outputs include required disclaimers like “this does not constitute financial advice.” Similarly, for a healthcare chatbot, you might verify the presence of phrases such as “consult a licensed medical professional” to ensure safety and compliance.
 
 **How it’s measured**. Use a predefined list of words or phrases and scan the generated text for TRUE/FALSE matches.
 
@@ -328,9 +329,9 @@ This is useful both in offline experiments and in live production, where it can 
 
 **When it’s useful**. For enforcing format-specific rules such as email addresses, phone numbers, ID or date formats. It ensures that the output adheres to predefined patterns
 
-**Example**  
-Pattern: `^\(\d{3}\) \d{3}-\d{4}$`  
-Valid match: `(123) 456-7890`
+> **Example**  
+> Pattern: `^\(\d{3}\) \d{3}-\d{4}$`  
+> Valid match: `(123) 456-7890`
 
 **How it’s measured**. Use a regular expression with libraries like Python’s `re` module to detect pattern matches.
 
@@ -340,9 +341,9 @@ Valid match: `(123) 456-7890`
 
 **When it’s useful**. This is important when the output needs to be parsed as structured data — for example, passing the response to an API, writing to configuration files, storing in a structured format (e.g., logs, databases).
 
-**Example**  
-✅ `{"name": "Alice", "age": 25}`  
-❌ `{"name": "Alice", "age":}`
+> **Example**  
+> ✅ `{"name": "Alice", "age": 25}`  
+> ❌ `{"name": "Alice", "age":}`
 
 **How it’s measured**. Use a JSON parser such as Python’s json.loads() to check if the output can be parsed successfully.
 
@@ -352,9 +353,9 @@ Valid match: `(123) 456-7890`
 
 **When it’s useful** To verify that a link is present when you expect it to, in outputs like emails, chatbot replies, or content generation.
 
-**Example**  
-✅ “Visit us at https://example.com”
-❌ “Visit us at example[dot]com”
+> **Example**  
+> ✅ “Visit us at https://example.com”
+> ❌ “Visit us at example[dot]com”
 
 **How it’s measured**. Use regular expressions or URL validation libraries (e.g., validators in Python) to confirm URL presence and format.
 
@@ -365,16 +366,15 @@ Valid match: `(123) 456-7890`
 **When it’s useful**. Whether a JSON object in the output matches a predefined schema.
 When it’s useful: Whenever you deal with structured generation and instruct an LLM to return the output of a specific format. This helps verify that JSON outputs not only follow syntax rules but also match the expected structure, including required fields and value types.
 
-**Schema example**  
-```json
-{"name": "string", "age": "integer"}
-```
+> **Schema example**  
+> ```json
+> {"name": "string", "age": "integer"}
+> ```
+> 
+> ✅ Matches: `{"name": "Alice", "age": 25}`  
+> ❌ Doesn’t match: `{"name": "Alice", "age": "twenty-five"}`
 
-✅ Matches: `{"name": "Alice", "age": 25}`  
-❌ Doesn’t match: `{"name": "Alice", "age": "twenty-five"}`
-
-**How it’s measured**  
-Use tools like Python’s `jsonschema` for structural validation.
+**How it’s measured**: use tools like Python’s `jsonschema` for structural validation.
 
 ### JSON match
 
@@ -390,9 +390,9 @@ Use tools like Python’s `jsonschema` for structural validation.
 
 **When it’s useful**  In SQL generation tasks.
 
-**Example**  
-✅ `SELECT * FROM users WHERE age > 18;`  
-❌ `SELECT FROM users WHERE age > 18`
+> **Example**  
+> ✅ `SELECT * FROM users WHERE age > 18;`  
+> ❌ `SELECT FROM users WHERE age > 18`
 
 **How it’s measured**. Use SQL parsers like `sqlparse`, or attempt query execution in a sandbox environment.
 
@@ -402,17 +402,17 @@ Use tools like Python’s `jsonschema` for structural validation.
 
 **When it’s useful** In tasks where generative models produce executable code. Ensures output can be parsed and run without syntax errors.
 
-**Example**  
-✅  
-```python
-def add(a, b):
-    return a + b
-```  
-❌  
-```python
-def add(a, b):
-    return a +
-```
+> **Example**  
+> ✅  
+> ```python
+> def add(a, b):
+>      return a + b
+> ```  
+> ❌  
+> ```python
+> def add(a, b):
+>     return a +
+> ```
 
 **How it’s measured**  
 Use Python’s built-in modules (e.g., `ast.parse()`) to attempt parsing. If a `SyntaxError` is raised, the code is invalid.
@@ -437,21 +437,21 @@ To handle this, the machine learning community developed overlap-based metrics l
 
 This combination of n-gram precision and brevity adjustment makes BLEU a widely used metric for evaluating text generation tasks like translation or summarization.
 
-**Example**  
-Reference: “The fluffy cat sat on a warm rug.”  
-Generated: “The fluffy cat rested lazily on a warm mat.”
-
-- **Overlapping unigrams (words)**: “The”, “fluffy”, “cat”, “on”, “a”, “warm” → 6/9 → unigram precision = 2/3  
-- **Overlapping bigrams**: “The fluffy”, “fluffy cat”, “on a”, “a warm” → 4/8 → bigram precision = 0.5  
-- **Overlapping trigrams**: “The fluffy cat”, “on a warm” → 2/7 → trigram precision = 2/7  
-- **No overlapping 4-grams**  
-- **Brevity penalty** is not applied here because the generated text is longer than the reference.
-
-Final BLEU score:  
-
-$$
-\text{BLEU} = \mathrm{brevity\_penalty} \cdot \exp\left( \sum_n \mathrm{precision\_score}(n\text{-grams}) \right)
-$$
+> **Example**  
+> Reference: “The fluffy cat sat on a warm rug.”  
+> Generated: “The fluffy cat rested lazily on a warm mat.”
+> 
+> - **Overlapping unigrams (words)**: “The”, “fluffy”, “cat”, “on”, “a”, “warm” → 6/9 → unigram precision = 2/3  
+> - **Overlapping bigrams**: “The fluffy”, “fluffy cat”, “on a”, “a warm” → 4/8 → bigram precision = 0.5  
+> - **Overlapping trigrams**: “The fluffy cat”, “on a warm” → 2/7 → trigram precision = 2/7  
+> - **No overlapping 4-grams**  
+> - **Brevity penalty** is not applied here because the generated text is longer than the reference.
+> 
+> Final BLEU score:  
+> 
+> $$
+> \text{BLEU} = \mathrm{brevity\_penalty} \cdot \exp\left( \sum_n \mathrm{precision\_score}(n\text{-grams}) \right)
+> $$
 
 **Limitations** While BLEU is a popular metric, it has some notable limitations. 
 - First, it relies heavily on exact word matching, which means it penalizes valid synonyms or paraphrases. For example, it would score “The dog barked” differently from “The puppy barked,” even though they mean similar things.
@@ -466,10 +466,10 @@ ROUGE typically includes two variants:
 - **ROUGE-N**: Measures overlap of word n-grams (e.g., unigrams, bigrams) between the reference and the generated output. For example, it might compare single words (unigrams), pairs of words (bigrams), or longer sequences.
 - **ROUGE-L**: Measures the Longest Common Subsequence (LCS) — identifying the longest ordered set of words shared by both texts. This captures structural similarity and sentence-level alignment better than simple n-grams.
 
-**Example (Summarization)**  
-- **Reference**: “*The movie was* exciting and *full of twists**.”  
-- **Generated**: “*The movie was full of* exciting *twists*</span>**.”  
-- **ROUGE-L** would identify the **Longest Common Subsequence (LCS)** — the **overlapping phrase structure** shown in italic.
+> **Example**  
+> - **Reference**: “*The movie was* exciting and *full of twists**.”  
+> - **Generated**: “*The movie was full of* exciting *twists*</span>**.”  
+> - **ROUGE-L** would identify the **Longest Common Subsequence (LCS)** — the **overlapping phrase structure** shown in italic.
 
 **Limitations**. Like BLEU, ROUGE has important limitations:
 -  It relies on surface-level word matching, and does not recognize semantic similarity — for example, it may penalize “churn went down” vs. “churn decreased” even though they are equivalent.
@@ -488,7 +488,7 @@ This has led to the development of more advanced alternatives:
 
 Let’s keep building your evaluation toolkit!
 
-# Chapter 4: Model-Based Scoring
+# Chapter 4: Model-based scoring
 
 The evaluation methods we've covered so far — like overlap-based metrics (BLEU, ROUGE) and text pattern checks — are deterministic and rule-based. While useful, they can be too rigid for evaluating the rich, open-ended outputs generated by LLMs.
 
@@ -499,11 +499,11 @@ In this chapter, we’ll explore:
 - ML models for evaluating specific output qualities
 - LLMs as judges, scoring responses using prompts
 
-## Similarity-Based Metrics and Embeddings
+## Similarity-based metrics and embeddings
 
-Embedding-based methods improve reference-based evaluation by capturing **semantic meaning**, not just surface-level matches.
+Embedding-based methods improve reference-based evaluation by capturing semantic meaning, not just surface-level matches.
 
-To evaluate outputs using embeddings, you typically follow two main steps:
+To evaluate semenatic similarity, you typically follow two main steps:
 - Generate embeddings for the inputs — such as the reference and the generated response.
 - Measure similarity between them to assess how closely their meanings align.
 
@@ -517,35 +517,25 @@ For example, measuring the semantic similarity between the model’s output and 
 
 Embeddings provide the foundation for similarity-based scoring. They represent words, sentences, or documents as vectors in a high-dimensional space — capturing semantic relationships in texts. Different types of embeddings serve different purposes and levels of granularity. Choosing the right one depends on the structure and complexity of the task you’re evaluating.
 
-#### Word-Level Embeddings
+**Word-Level Embeddings**. Word-level embeddings assign a fixed vector to each word based on its overall meaning. Popular models include **Word2Vec** and **GloVe**.
 
-Word-level embeddings assign a fixed vector to each word based on its overall meaning. Popular models include **Word2Vec** and **GloVe**.
-
-Example: “dog” and “puppy” will have similar embeddings due to their related meanings.
+> **Example**: “dog” and “puppy” will have similar embeddings due to their related meanings.
 
 Limitation: These embeddings ignore context. For example, the word “bank” has the same vector whether referring to a riverbank or a financial institution — which makes them less useful for nuanced evaluations.
 
-#### Sentence-Level Embeddings
+**Sentence-Level Embeddings**. Sentence embeddings combine the meanings of individual words to produce a single vector for a full sentence. Common tools include **Sentence-BERT** and **Universal Sentence Encoder**. These embeddings are particularly useful for tasks that involve longer text units, such as evaluating the coherence of summaries, comparing paragraphs, or analyzing conversational responses.
 
-Sentence embeddings combine the meanings of individual words to produce a single vector for a full sentence. Common tools include **Sentence-BERT** and **Universal Sentence Encoder**.
+**Contextualized Embeddings**. Contextualized embeddings are generated by models like **BERT** or **GPT**, which produce vectors that adapt based on how words are used in context.
 
-These embeddings are particularly useful for tasks that involve longer text units, such as evaluating the coherence of summaries, comparing paragraphs, or analyzing conversational responses.
-
-#### Contextualized Embeddings
-
-Contextualized embeddings are generated by models like **BERT** or **GPT**, which produce vectors that adapt based on how words are used in context.
-
-Example:
-- “He went to the bank to fish”
-- “She visited the bank for a loan”
-
-→ The word “bank” receives different vectors depending on the context, allowing for far more accurate comparisons.
+> **Example**:
+> - “He went to the bank to fish”
+> - “She visited the bank for a loan”
+> 
+> → The word “bank” receives different vectors depending on the context, allowing for far more accurate comparisons.
 
 These embeddings are especially powerful for dialogue evaluation, grounded response checks, and semantic alignment in open-ended tasks.
 
-### Generating embeddings
-
-There are several ways to obtain embeddings, depending on your task and resources:
+**Generating embeddings**.There are several ways to obtain embeddings, depending on your task and resources:
 - Use pre-trained models like **BERT**, **GPT**, or **Sentence-BERT**  
   → Fast and easy for general-purpose semantic tasks.
 - Fine-tune models on domain-specific data (e.g., legal, clinical, financial)  
@@ -559,11 +549,12 @@ Once you’ve generated embeddings for your inputs and outputs, the next step is
 
 **Cosine similarity** is a straightforward metric that measures the angle between two vectors in embedding space. It captures how closely aligned the vectors are, providing a score that reflects their semantic similarity.
 
-For example, if the reference text is “I agree to purchase the software license” and the generated text is “I’m okay with moving forward with the software purchase,” cosine similarity would assign a high score. While the wording differs, the intent and meaning are the same — confirming agreement to buy. This makes cosine similarity a valuable tool for identifying semantic alignment even when surface phrasing varies.
+> For example, if the reference text is “I agree to purchase the software license” and the generated text is “I confirm buying the software license,” cosine similarity would assign a high score. While the wording differs, the intent and meaning are the same — confirming agreement to buy. This makes cosine similarity a valuable tool for identifying semantic alignment even when surface phrasing varies.
 
 It is computationally efficient and widely used for tasks like semantic search, ranking, and clustering in NLP applications.
 
 **BERTScore** offers a more nuanced evaluation by going beyond direct comparisons of entire sentence embeddings. It aligns tokens in the reference and generates texts using contextual embeddings from models like BERT. The metric then computes precision, recall, and F1 scores at the token level, based on the similarity of these embeddings — making it well-suited for identifying subtle semantic equivalence.
+
 > **Example**: If the reference text is “We decided to approve the proposal,” and the generated text is “The team agreed to move forward with the plan,” BERTScore recognizes semantic > matches like “approve” ↔ “move forward” and “proposal” ↔ “plan.”
 
 It’s particularly effective for tasks where context and phrasing matter, such as summarization, paraphrasing, or content generation.
@@ -572,11 +563,11 @@ It’s particularly effective for tasks where context and phrasing matter, such 
 
 > **Example**: If the reference query is “How do I change my password?” and the generated response is “What steps should I follow to update my login credentials?”, a cross-encoder > would recognize the shared intent and assign a high similarity score, even though the exact words differ.
 
-**Summing up** Similarity-based metrics  —  such as cosine similarity, BERTScore, and cross-encoder scoring  — offer powerful ways to evaluate generative models in reference-based settings by focusing on semantic similarity rather than exact wording. 
+**Summing up**. Similarity-based metrics  —  such as cosine similarity, BERTScore, and cross-encoder scoring  — offer powerful ways to evaluate generative models in reference-based settings by focusing on semantic similarity rather than exact wording. 
 
 *Next, we’ll explore model-based scoring techniques that go beyond similarity — using ML models to assess specific output qualities like sentiment, toxicity, or factuality, and leveraging LLMs as evaluators through prompt-based judging*.
 
-## Model-Based Scoring
+## Model-based scoring
 
 Another approach to evaluation is using narrow predictive models — either pre-trained or trained in-house — to score specific qualities of the generated output. These models can focus on evaluating attributes such as **sentiment**, **toxicity**, or presence of **sensitive information (PII)**.
 
@@ -584,38 +575,29 @@ This method is especially useful when you care about one well-defined dimension 
 
 ### Sentiment Scoring
 
-Sentiment scoring evaluates the emotional tone of the generated text.  
-It is commonly used in applications like:
+Sentiment scoring evaluates the emotional tone of the generated text. It is commonly used in applications like:
 - Chatbots  
 - Product reviews  
 - Social media monitoring  
 
 Pre-trained sentiment analysis models categorize text as positive, negative, or neutral and often assign a score to reflect the strength of the sentiment.
 
-**Example**  
-Generated text:  
-> “I absolutely loved the new product! It’s a game-changer.”  
-Sentiment score:  
-> Positive (0.95), on a scale from -1 to 1 (where 1 indicates strong positivity)
+> **Example**  
+> Generated text: “I absolutely loved the new product! It’s a game-changer.”  
+> Sentiment score: Positive (0.95), on a scale from -1 to 1 (where 1 indicates strong positivity)
 
-### Toxicity Scoring
+### Toxicity scoring
 
-Toxicity scoring detects harmful or offensive language, which is critical for maintaining safety and compliance in user-facing applications such as:
-- Community forums  
-- Messaging tools  
-
-Pre-trained moderation models analyze text for:
+Toxicity scoring detects harmful or offensive language, which is critical for maintaining safety and compliance in user-facing applications such as community forums, messaging tools and chatbots.Pre-trained moderation models can analyze text for:
 - Abusive tone  
 - Hate speech  
 - Inappropriate content  
 
-**Example**  
-Generated text:  
-> “This is the worst idea ever. You must be really clueless.”  
-Toxicity score:  
-> 0.80 (on a scale from 0 to 1, where higher values indicate more toxic content)
+> **Example**  
+> Generated text: “This is the worst idea ever. You must be really clueless.”  
+> Toxicity score: 0.80 (on a scale from 0 to 1, where higher values indicate more toxic content)
 
-### PII Detection
+### PII detection
 
 PII (Personally Identifiable Information) detection checks whether the output includes sensitive details such as:
 - Names  
@@ -625,40 +607,31 @@ PII (Personally Identifiable Information) detection checks whether the output in
 
 Models trained for PII detection scan text for patterns or keywords that match sensitive data formats. These models are crucial for ensuring privacy compliance with regulations like GDPR or CCPA.
 
-**Example**  
-Generated text:  
-> “Contact us at 555-123-4567 for more details.”  
-PII detected:  
-> Phone number
+> **Example**  
+> Generated text: “Contact us at 555-123-4567 for more details.”  
+> PII detected: Phone number
 
-### Pre-trained ML Models
+### Pre-trained ML models
 
-You can use **pre-trained models** from open platforms like the **Hugging Face Hub**, which offers a wide selection of models for common model-based scoring tasks such as:
-- Sentiment analysis  
-- Toxicity detection  
-- Named entity recognition  
-- PII detection  
-
-However, it's important to validate these models on your specific use case — since you don’t have access to their original training data, performance may vary depending on domain or context.
+You can use pre-trained models from open platforms like the **Hugging Face Hub**, which offers a wide selection of models for common model-based scoring tasks such as sentiment analysis, toxicity detection, named entity recognition, PII detection. However, it's important to validate these models on your specific use case — since you don’t have access to their original training data, performance may vary depending on domain or context.
 
 You can also consider training your own lightweight models on task-specific or domain-specific data to improve accuracy and alignment with your quality criteria.
 
-## LLM-as-Judge
+## LLM-as-judge
 
 Large Language Models can do more than generate text — they can also evaluate it. This approach, known as LLM-as-Judge, uses an LLM to assess text outputs based on custom criteria defined through prompts. It has gained popularity because it offers a scalable, flexible, and cost-effective alternative to human evaluation, especially for open-ended tasks.
 
-To use an LLM as a “judge,” you provide it with clear evaluation prompts — much like you would write labeling instructions for a human annotator. These prompts define what to evaluate and how to score it.
+To use an LLM as a “judge,” you provide it with clear **evaluation prompts** — much like you would write labeling instructions for a human annotator. These prompts define what to evaluate and how to score it.
 
-### How it works
-
-- Define the task. Decide which aspects of the output the LLM should evaluate — such as factual accuracy against reference, relevance, helpfulness, tone, etc. This should be informed by your analysis of your task outputs and known failure modes or quality criteria you want to capture. 
-- Write the evaluation prompt. Create an instruction that explains what to assess, how to interpret each label or score, and what kind of result to return (e.g., a numeric score, a category, or an explanation or critique).
-- Run the evaluation. Provide the generated output — along with any relevant input, question, or reference — as part of the prompt and pass it to the LLM for evaluation.
-- Get the output. The LLM returns a score, label, or qualitative feedback based on your instruction
+Here is how it works:
+- **Define the task**. Decide which aspects of the output the LLM should evaluate — such as factual accuracy against reference, relevance, helpfulness, tone, etc. This should be informed by your analysis of your task outputs and known failure modes or quality criteria you want to capture. 
+- **Write the evaluation prompt**. Create an instruction that explains what to assess, how to interpret each label or score, and what kind of result to return (e.g., a numeric score, a category, or an explanation or critique).
+- **Run the evaluation**. Provide the generated output — along with any relevant input, question, or reference — as part of the prompt and pass it to the LLM for evaluation.
+- **Get the output**. The LLM returns a score, label, or qualitative feedback based on your instruction
 
 You can use LLM-as-Judge for both reference-based and reference-free evaluations, depending on whether you have a ground truth to compare against or want to score outputs independently based on defined criteria.
 
-## Reference-based evaluation
+## Reference-based LLM judges
 
 You can use an LLM as a semantic similarity judge to compare generated responses against a reference answer. This approach is useful for tasks like question answering, retrieval-augmented generation (RAG), or any use case where an expected output is available.
 
@@ -672,7 +645,7 @@ You can also assess these aspects separately — for instance, evaluating whethe
 
 ![](images/llm_evidently_img9-min.png)
 
-## Reference-free evaluation
+## Reference-free LLM judges
 
 LLMs can also be used to evaluate open-ended outputs where there’s no reference — such as chatbot replies or creative text generation. Instead of comparing to a ground truth, you ask the LLM to assess specific qualities of the output on its own.
 
@@ -691,7 +664,7 @@ The advantage of this approach is its ability to automate the evaluation process
 
 To make the most of this method, it's helpful to start with manual analysis of your outputs. This helps you identify repeated failure modes or quality dimensions that matter for your use case. You can also design targeted testing scenarios — for instance, crafting adversarial prompts that intentionally provoke biased behavior, and then evaluating the outputs with a scoring prompt.
 
-### Example: Bias Detection Prompt
+**Example: bias detection prompt**
 
 Below is a simplified example from the **Evidently OSS Python library**. It classifies whether a response exhibits bias.
 
@@ -720,7 +693,7 @@ Return category, reasoning formatted as json without formatting as follows:
 }
 ```
 
-## RAG Evaluation
+## RAG evaluation
 
 The LLM-as-a-Judge approach is especially powerful for evaluating complex systems like Retrieval-Augmented Generation (RAG).
 
@@ -730,12 +703,14 @@ You can evaluate key aspects like:
 -  **Relevance or Context Quality**. Are the retrieved document chunks relevant to the query? Do they contain enough information to support a good answer?
 This helps you surface possible gaps in your knowledge base or inefficiencies in your search or chunking strategies. 
 - **Faithfulness/Groundedness** Does the generated response stay factually aligned with the retrieved context?
-> **Example**. If the document says “Employees are eligible for paid time off after 90 days,” but the system answers “Employees are eligible for unlimited paid time off,” this should be flagged. The “unlimited” detail is hallucinated and unsupported.
+> **Example**.
+> If the document says “Employees are eligible for paid time off after 90 days,” but the system answers “Employees are eligible for unlimited paid time off,” this should be flagged. The “unlimited” detail is hallucinated and unsupported.
 - **Refusals**. How often does the system decline to answer? This will help assess the user experience by flagging questions that are left unanswered.
 
 These evaluation aspects do not require reference response — which makes them especially useful for monitoring in production. 
 
-Here is an example of evaluating the validity of the context ("does it help answer the question?")
+> **Example**.
+> An LLM judge is tasked with evaluating the validity of the context ("does it help answer the question?")
 ![](images/llm_evidently_img2-min.png)
 
 You can also assess additional properties when you conduct offline evaluations using designed test cases that target specific scenarios.
@@ -747,8 +722,7 @@ You can also assess additional properties when you conduct offline evaluations u
 
 **Correctness testing** . When you have ground truth responses available, you can also assess RAG output correctness just like any other system: by comparing its answers against the expected responses. This can be done using semantic similarity, or by using an LLM-as-Judge to score alignment and faithfulness.
 
-You can read more about RAG evaluation in this blog:  
-https://www.evidentlyai.com/blog/open-source-rag-evaluation-tool
+> 📖 **Further reading**: [RAG evaluations](https://www.evidentlyai.com/blog/open-source-rag-evaluation-tool).  
 
 ## AI agent evaluations
 
@@ -757,13 +731,16 @@ For agent-based systems, where the AI is responsible for performing tasks such a
 You can use it to evaluate task execution along multiple dimensions. For example:
 
 - **Usefulness**. Did the agent provide a response that was clear, actionable, and helpful?
-> **Example**. If asked to schedule a meeting, did it provide all necessary details like time and location?
+> **Example**.
+> If asked to schedule a meeting, did it provide all necessary details like time and location?
 
 - **Task Completion**. Did the agent complete the assigned task?
-> **Example**. If it was supposed to send an email or create a calendar event, was the task actually executed? An LLM-as-a-Judge can verify this by checking logs, API responses, or other system-level confirmations to ensure the action was performed. 
+> **Example**.
+> If it was supposed to send an email or create a calendar event, was the task actually executed? An LLM-as-a-Judge can verify this by checking logs, API responses, or other system-level confirmations to ensure the action was performed. 
 
 - **Correct Tool Use**. Did the agent invoke the appropriate tools or APIs to complete the action?
-> **Example**.If the user asks to add an event to their calendar, the agent should select the correct calendar tool (e.g., Google Calendar or Outlook) based on the user’s context — and avoid hallucinating unsupported or unexpected commands.
+> **Example**.
+> If the user asks to add an event to their calendar, the agent should select the correct calendar tool (e.g., Google Calendar or Outlook) based on the user’s context — and avoid hallucinating unsupported or unexpected commands.
 
 ![](images/llm_evidently_img11-min.png)
 
@@ -780,26 +757,28 @@ Session-level evaluations help you understand the agent’s behavior in context 
 
 Getting LLMs to act as reliable evaluators is very achievable — with well-crafted prompts and clarity on what you are evaluating. Here are key principles to follow:
 
-- **Stick to Simple Scoring**. Use straightforward labels like “Relevant” vs. “Irrelevant.” If needed, expand to three options (e.g., Relevant, Partially Relevant, Irrelevant). Avoid complex scales that can introduce ambiguity.
-- **Define the Labels**. Always explain what each label means in your context, do not assume for LLM to infer it. For example: "Toxic refers to content that is harmful, offensive, or abusive." Clear definitions lead to more consistent judgments.
-- **Focus on One Dimension at a Time**. Evaluate only one criterion per prompt — such as relevance, tone, or completeness. If you need to assess multiple dimensions, run separate evaluations.
-- **Add Examples**. Consider anchoring the task with examples. For instance, if evaluating tone into “good” and “bad”, you can include examples of both:
-	•	Good: “Sure, I’d be happy to help!”
-	•	Bad: “I don’t know. Figure it out.”
-- **Ask for Reasons**. Use Chain-of-Thought (CoT) prompting: ask the LLM to explain why it made its judgment. This improves accuracy and creates a reviewable reasoning trail.
-- **Use Structured Output**. Request output in structured formats like JSON for easier downstream analysis like: { "score": "Good", "reason": "Polite and clear response." }
-- **Test Your Prompt**. Manually label a few examples yourself before creating an LLM judge. If something feels unclear, revise your instructions. Then, test LLM judgements against your labels, and tune as necessary. 
-- **Set a Low Temperature**. Use a low temperature setting (e.g., 0–0.3) to minimize randomness and get consistent evaluations.
-- **Use a Strong Model**. Use capable models (like GPT-4) for nuanced judgment tasks. Simpler models can be tested once the prompt is validated.
-- **Allow “Unclear”**. Give the model an “I don’t know” or “Unclear” option when there isn’t enough information. This prevents forced or poor-quality judgments.
+- **Stick to simple scoring**. Use straightforward labels like “Relevant” vs. “Irrelevant.” If needed, expand to three options (e.g., Relevant, Partially Relevant, Irrelevant). Avoid complex scales that can introduce ambiguity.
+- **Define the labels**. Always explain what each label means in your context, do not assume for LLM to infer it. For example: "Toxic refers to content that is harmful, offensive, or abusive." Clear definitions lead to more consistent judgments.
+- **Focus on one dimension at a time**. Evaluate only one criterion per prompt — such as relevance, tone, or completeness. If you need to assess multiple dimensions, run separate evaluations.
+- **Add examples**. Consider anchoring the task with examples.
+> **Example**.
+> For instance, if evaluating tone into “polite” and “impolite”, you can include examples of both:
+> Good: “Sure, I’d be happy to help!”
+> Bad: “I don’t know. Figure it out.”
+- **Ask for reasons**. Use Chain-of-Thought (CoT) prompting: ask the LLM to explain why it made its judgment. This improves accuracy and creates a reviewable reasoning trail.
+- **Use structured output**. Request output in structured formats like JSON for easier downstream analysis like: { "score": "Good", "reason": "Polite and clear response." }
+- **Test your prompt**. Manually label a few examples yourself before creating an LLM judge. If something feels unclear, revise your instructions. Then, test LLM judgements against your labels, and tune as necessary. 
+- **Set a low temperature**. Use a low temperature setting (e.g., 0–0.3) to minimize randomness and get consistent evaluations.
+- **Use a strong model**. Use capable models (like GPT-4) for nuanced judgment tasks. Simpler models can be tested once the prompt is validated.
+- **Allow “unclear”**. Give the model an “I don’t know” or “Unclear” option when there isn’t enough information. This prevents forced or poor-quality judgments.
 
-See more details on the LLM-as-a-Judge in this guide: https://www.evidentlyai.com/llm-guide/llm-as-a-judge 
+> 📖 **Further reading**: [LLM-as-a-Jugde Guide](https://www.evidentlyai.com/llm-guide/llm-as-a-judge ).  
 
-# Chapter 5: Production Monitoring and Observability
+# Chapter 5: Production monitoring and observability
 
 Deploying a generative system into production is an exciting milestone — but it’s only the beginning. Once the system is live, you need to monitor its performance continuously to ensure it remains accurate, efficient, and aligned with user needs. Production monitoring and observability help you track behavior, detect issues early, and maintain a high-quality user experience.
 
-## LLM Monitoring vs. Observability
+## LLM monitoring vs. observability
 
 Although often used interchangeably, monitoring and observability serve distinct but complementary roles.
 - **Monitoring** involves tracking key system metrics and setting up alerts for failures or anomalies. It helps warn you when something is off — for instance, rising error rates or increasing latency.
@@ -811,11 +790,11 @@ Together, they create a complete picture:
 
 In production, both are necessary. Real-world usage introduces unexpected inputs and behaviors, making it essential to be able to perform continuous analysis. 
 
-## What to Monitor
+## What to monitor
 
 Observability can happen at multiple levels, including infrastructure, system inputs and outputs.
 
-### 1. System Health
+### 1. System health
 
 Before evaluating system outputs, ensure the underlying infrastructure is healthy. No matter how good the LLM and prompt is, it won’t deliver value if the infrastructure is unreliable. Monitor metrics such as:
 
@@ -825,7 +804,7 @@ Before evaluating system outputs, ensure the underlying infrastructure is health
 
 Standard application monitoring tools typically handle these effectively.
 
-### 2. Input Quality
+### 2. Input quality
 
 Many LLM issues start with problematic inputs, especially in pipeline setups where upstream systems generate the input. Depending on your case, monitor for:
 
@@ -835,7 +814,7 @@ Many LLM issues start with problematic inputs, especially in pipeline setups whe
 
 Validating the quality of incoming data improves response accuracy and helps avoid silent failures.
 
-### 3. LLM Output Quality
+### 3. LLM output quality
 
 This is where online LLM evaluations come into picture. Once your system is running, you’ll want to assess the quality and relevance of the generated outputs continuously. Even the most thorough pre-launch testing can’t prepare you for every unique query or unexpected behavior.
 
@@ -848,11 +827,11 @@ Some examples of things you can track:
 
 Even without ground truth references, you can evaluate output quality using automated methods. Online evaluations can also help surface product insights — such as frequently asked questions, user scenarios and gaps in your knowledge base — which can guide product iteration.
 
-## How to Set Up Observability 
+## How to set up observability 
 
 A robust monitoring and evaluation process combines several components. Here’s how to build it:
 
-### Start with Logging and Tracing
+### Start with logging and tracing
 
 Two foundational tools for observability are logging and tracing. These allow you to record and understand your system's behavior during real-world use.
 
@@ -861,7 +840,7 @@ Two foundational tools for observability are logging and tracing. These allow yo
 
 Together, logs and traces provide critical insight into system behavior and performance issues.
 
-### Configure Evaluations
+### Configure evaluations
 
 Once logs are collected, you can review them manually. But to scale evaluation, it’s essential to automate it. This involves regularly scoring the quality of model outputs based on pre-defined criteria.
 
@@ -875,7 +854,7 @@ Since you don’t have “correct” answers in live settings, you’ll use refe
 - Regex and format checks: Validating structure (e.g., proper JSON).  
 - Text statistics: Measuring things like length or word presence.
 
-### Build a Dashboard
+### Build a dashboard
 
 Dashboards offer near real-time overview of your system’s performance. A good dashboard helps both technical and product teams stay aligned.
 
@@ -890,7 +869,7 @@ In addition to system quality metrics, dashboards can show business KPIs that re
 
 It’s important to collaborate with business stakeholders to define the most relevant KPIs for your product goals.
 
-### Set Up Alerts
+### Set up alerts
 
 Dashboards are great, but you won’t be watching them 24/7. Alerts help you stay responsive to issues by notifying you when something goes wrong.
 
@@ -903,13 +882,13 @@ You can configure alerts to trigger immediately, or set rules based on patterns 
 
 This gives you an early warning system so that you can intervene on time.
 
-## Evaluation Feedback Loop
-
-![](images/llm_evidently_img12-min.png)
+## Evaluation feedback loop
 
 Monitoring and evaluation are not just for detecting issues — they form the foundation for continuous improvement. A robust evaluation loop becomes a flywheel that drives AI product evolution at every stage, from your first prompt experiments to large-scale deployment.
 
 You need LLM evaluations throughout the system lifecycle, and these workflows build on each other. Early-stage testing reveals basic failures; production monitoring surfaces real-world issues. Feeding learnings from one stage into the next is what makes the system smarter over time.
+
+![](images/llm_evidently_img12-min.png)
 
 One of the most powerful practices is curating and **maintaining a high-quality test dataset**. This is not a one-time step. You should continuously update your test set with new examples from production — including bugs, regressions, edge cases, or tasks where performance is critical. With such a dataset, you can confidently evaluate changes like prompt updates or new model versions. Without it, even small changes feel risky, and the system becomes fragile and hard to evolve.
 
