@@ -588,7 +588,7 @@ Pre-trained sentiment analysis models categorize text as positive, negative, or 
 
 ### Toxicity scoring
 
-Toxicity scoring detects harmful or offensive language, which is critical for maintaining safety and compliance in user-facing applications such as community forums, messaging tools and chatbots.Pre-trained moderation models can analyze text for:
+Toxicity scoring detects harmful or offensive language, which is critical for maintaining safety and compliance in user-facing applications such as community forums, messaging tools and chatbots. Pre-trained moderation models can analyze text for:
 - Abusive tone  
 - Hate speech  
 - Inappropriate content  
