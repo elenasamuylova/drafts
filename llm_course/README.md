@@ -702,7 +702,7 @@ In a RAG system, the model retrieves content (e.g. from documents or a knowledge
 You can evaluate key aspects like:
 -  **Relevance or Context Quality**. Are the retrieved document chunks relevant to the query? Do they contain enough information to support a good answer?
 This helps you surface possible gaps in your knowledge base or inefficiencies in your search or chunking strategies. 
-- **Faithfulness/Groundedness** Does the generated response stay factually aligned with the retrieved context?
+- **Faithfulness/Groundedness**. Does the generated response stay factually aligned with the retrieved context?
 > **Example**.
 > If the document says “Employees are eligible for paid time off after 90 days,” but the system answers “Employees are eligible for unlimited paid time off,” this should be flagged. The “unlimited” detail is hallucinated and unsupported.
 - **Refusals**. How often does the system decline to answer? This will help assess the user experience by flagging questions that are left unanswered.
