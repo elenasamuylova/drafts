@@ -325,7 +325,7 @@ Pattern-based evaluation focuses on the structural, syntactic, or functional cor
 
 This is useful both in offline experiments and in live production, where it can also act as a guardrail. For example, if you expect a model to generate a properly formatted JSON and it fails to do so, you can catch this and ask to re-generate the output. You can also use these checks during model experiments — for example, to compare how well different models generate valid structured outputs.
 
-### RegExp (Regular Expression) Matching
+### RegExp (Regular Expression) matching
 
 **What it checks**. Whether the text matches a predefined pattern.
 
