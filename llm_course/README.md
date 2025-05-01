@@ -180,7 +180,7 @@ Since multiple valid answers are often possible, you cannot rely solely on exact
 
 Reference-free methods directly assign quantitative scores or labels to the generated outputs without needing a ground truth answer.
 
-This workf for both **offline and online testing**, when obtaining references isn’t possible or practical — for example:
+This works for both **offline and online testing**, when obtaining references isn’t possible or practical — for example:
 - In complex, open-ended tasks like content generation  
 - In multi-turn conversations  
 - In production settings, where outputs are evaluated in real time  
@@ -219,7 +219,7 @@ Model-based methods:
 One more important distinction to make before we move into specific examples is between:
 
 - Evaluations conducted at the dataset level
-- Evaluations conducted at the individual input/output (row) level)
+- Evaluations conducted at the individual input/output (row) level
 
 **Dataset-level** metrics aggregate results across all predictions and produce a single quality measure. This is typical for predictive tasks. In classic ML, we often use metrics like: Precision, Recall, F1 score. These metrics summarize performance across the full evaluation dataset — often with thousands or millions of examples.
 
