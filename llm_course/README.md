@@ -467,9 +467,9 @@ ROUGE typically includes two variants:
 - **ROUGE-L**: Measures the Longest Common Subsequence (LCS) — identifying the longest ordered set of words shared by both texts. This captures structural similarity and sentence-level alignment better than simple n-grams.
 
 > **Example**  
-> - **Reference**: “*The movie was* exciting and *full of twists*.”  
-> - **Generated**: “*The movie was full of* exciting *twists*.”  
-> - **ROUGE-L** would identify the **Longest Common Subsequence (LCS)** — the **overlapping phrase structure** shown in italic.
+> - Reference: “**The movie was** exciting and **full of twists**.”  
+> - Generated: “**The movie was full of** exciting **twists**.”  
+> - **ROUGE-L** would identify the Longest Common Subsequence (LCS) — the overlapping phrase structure shown in bold.
 
 **Limitations**. Like BLEU, ROUGE has important limitations:
 -  It relies on surface-level word matching, and does not recognize semantic similarity — for example, it may penalize “churn went down” vs. “churn decreased” even though they are equivalent.
